@@ -33,6 +33,8 @@ module.exports = {
     'react/button-has-type': 'off',
     'import/no-extraneous-dependencies': 'off',
     'global-require': 'off',
+    'no-useless-constructor': 'off',
+    'lines-between-class-members': ["error", "always", { exceptAfterSingleLine: true }],
     'class-methods-use-this': 'off',
     'prefer-destructuring': 'off',
     'prettier/prettier': 'error',
