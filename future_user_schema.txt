@@ -1,0 +1,13 @@
+user {
+	register
+	login
+	forgotPassword
+	forgotUsername
+	confirmEmail
+	
+	@loggedin
+	me
+	changePassword
+	changeEmail
+	logout
+}
