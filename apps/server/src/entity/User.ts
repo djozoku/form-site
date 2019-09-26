@@ -6,27 +6,27 @@ import { ObjectType, Field, ID } from 'type-graphql';
 export default class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id?: number = undefined;
+  id: number;
 
   @Field()
   @Column()
-  firstName?: string = undefined;
+  firstName: string;
 
   @Field()
   @Column()
-  lastName?: string = undefined;
-
-  @Field()
-  @Column('text', { unique: true })
-  username?: string = undefined;
+  lastName: string;
 
   @Field()
   @Column('text', { unique: true })
-  email?: string = undefined;
+  username: string;
+
+  @Field()
+  @Column('text', { unique: true })
+  email: string;
 
   @Column()
-  password?: string = undefined;
+  password: string;
 
   @Column()
-  confirmation: boolean = false;
+  confirmation: boolean;
 }
