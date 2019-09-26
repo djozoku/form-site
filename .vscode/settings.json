@@ -13,5 +13,9 @@
     "statusBarItem.hoverBackground": "#1d0385",
     "statusBar.foreground": "#e7e7e7"
   },
-  "peacock.color": "#120253"
+  "peacock.color": "#120253",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
