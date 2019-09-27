@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import dotenv from 'dotenv';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
@@ -7,17 +8,22 @@ import { createConnection } from 'typeorm';
 
 import UserResolver from './resolvers/User';
 
+dotenv.config();
+
+const isDev = process.env.NODE_ENV !== 'production';
+
 const main = async () => {
   await createConnection({
     name: 'default',
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'ozokudev',
-    database: 'form-db',
-    synchronize: true,
-    entities: ['src/entity/*.*']
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '5432', 10),
+    username: process.env.DB_USERNAME || 'postgres',
+    password: process.env.DB_PASSWORD || 'postgres',
+    database: process.env.DB_DATABASE || 'form-db',
+    synchronize: isDev || false,
+    entities: [`${__dirname}/entity/*.*`],
+    logging: isDev ? true : undefined
   });
   const app = express();
 
