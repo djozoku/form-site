@@ -29,7 +29,7 @@ const main = async () => {
 
   const schema = await buildSchema({ resolvers: [UserResolver] });
 
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({ schema, context: ({ req, res }) => ({ req, res }) });
 
   server.applyMiddleware({ app });
 
