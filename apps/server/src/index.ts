@@ -6,7 +6,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 
-import UserResolver from './resolvers/User';
+import UserResolvers from './resolvers/user';
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ const main = async () => {
   });
   const app = express();
 
-  const schema = await buildSchema({ resolvers: [UserResolver] });
+  const schema = await buildSchema({ resolvers: [...UserResolvers], validate: false });
 
   const server = new ApolloServer({ schema, context: ({ req, res }) => ({ req, res }) });
 
