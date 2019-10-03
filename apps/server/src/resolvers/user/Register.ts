@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Arg } from 'type-graphql';
-import { hashPassword } from '../../utils/password';
+import { hashPassword } from '../../utils/auth';
 import User from '../../entity/User';
 import RegisterInput from './inputs/RegisterInput';
 
