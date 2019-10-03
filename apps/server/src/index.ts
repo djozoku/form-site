@@ -1,14 +1,12 @@
+import 'dotenv/config';
 import 'reflect-metadata';
 
-import dotenv from 'dotenv';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 
 import UserResolvers from './resolvers/user';
-
-dotenv.config();
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -25,6 +23,7 @@ const main = async () => {
     entities: [`${__dirname}/entity/*.*`],
     logging: isDev ? true : undefined
   });
+
   const app = express();
 
   const schema = await buildSchema({ resolvers: [...UserResolvers], validate: false });
