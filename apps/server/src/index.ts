@@ -2,6 +2,7 @@ import 'dotenv/config';
 import 'reflect-metadata';
 
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
@@ -25,6 +26,8 @@ const main = async () => {
   });
 
   const app = express();
+
+  app.use(cookieParser());
 
   const schema = await buildSchema({ resolvers: [...UserResolvers], validate: false });
 
