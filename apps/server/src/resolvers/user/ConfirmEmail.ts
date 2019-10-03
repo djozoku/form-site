@@ -2,6 +2,7 @@ import { Resolver, /* Arg, */ Mutation } from 'type-graphql';
 
 // import User from '../../entity/User';
 
+// TODO: add email confirmation
 @Resolver()
 export default class ConfirmEmailResolver {
   @Mutation(() => Boolean)

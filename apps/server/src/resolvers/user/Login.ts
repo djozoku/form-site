@@ -23,6 +23,7 @@ export default class LoginResolver {
       throw new Error('Bad username or password');
     }
 
+    // TODO: set path to only refresh token
     res.cookie('xid', createRefreshToken(user.id), { httpOnly: true });
 
     return {

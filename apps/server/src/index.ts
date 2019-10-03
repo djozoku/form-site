@@ -27,6 +27,7 @@ const main = async () => {
 
   const app = express();
 
+  // TODO: add cors and refresh token route
   app.use(cookieParser());
 
   const schema = await buildSchema({ resolvers: [...UserResolvers], validate: false });

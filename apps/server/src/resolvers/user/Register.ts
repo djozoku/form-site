@@ -3,6 +3,7 @@ import { hashPassword } from '../../utils/auth';
 import User from '../../entity/User';
 import RegisterInput from './inputs/RegisterInput';
 
+// TODO: add email confirmation
 @Resolver()
 export default class RegisterResolver {
   @Mutation(() => User)
