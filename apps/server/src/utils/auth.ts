@@ -28,7 +28,7 @@ export const createRefreshToken = (userId: number) => {
   });
 };
 
-export const checkAuth: AuthChecker<MyContext> = ({ context }, roles) => {
+export const checkAuth: AuthChecker<MyContext> = ({ context } /* , roles */) => {
   const authorization = context.req.headers.authorization;
   if (!authorization) {
     throw new Error('Not Authenticated');
