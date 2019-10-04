@@ -10,6 +10,7 @@ import { createConnection } from 'typeorm';
 
 import MailSender from './utils/sendmail';
 import UserResolvers from './resolvers/user';
+import { refreshToken } from './utils/auth';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -33,6 +34,8 @@ const main = async () => {
 
   app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
   app.use(cookieParser());
+
+  app.post('/refresh_token', refreshToken);
 
   const schema = await buildSchema({ resolvers: [...UserResolvers], validate: false });
 
