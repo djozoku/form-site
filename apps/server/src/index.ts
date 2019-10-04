@@ -7,6 +7,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 
+import MailSender from './utils/sendmail';
 import UserResolvers from './resolvers/user';
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -24,6 +25,8 @@ const main = async () => {
     entities: [`${__dirname}/entity/*.*`],
     logging: isDev ? true : undefined
   });
+
+  await MailSender.init();
 
   const app = express();
 
