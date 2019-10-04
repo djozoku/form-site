@@ -3,6 +3,7 @@ import 'reflect-metadata';
 
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
@@ -30,7 +31,7 @@ const main = async () => {
 
   const app = express();
 
-  // TODO: add cors and refresh token route
+  app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
   app.use(cookieParser());
 
   const schema = await buildSchema({ resolvers: [...UserResolvers], validate: false });
