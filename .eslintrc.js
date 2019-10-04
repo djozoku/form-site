@@ -34,6 +34,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'global-require': 'off',
     'no-useless-constructor': 'off',
+    'no-console': 'off',
     'lines-between-class-members': ["error", "always", { exceptAfterSingleLine: true }],
     'class-methods-use-this': 'off',
     'prefer-destructuring': 'off',
@@ -43,6 +44,7 @@ module.exports = {
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/alt-text': [
       'warn',
