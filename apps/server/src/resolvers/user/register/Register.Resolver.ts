@@ -1,7 +1,7 @@
 import { Resolver, Mutation, Arg } from 'type-graphql';
-import { hashPassword } from '../../utils/auth';
-import User from '../../entity/User';
-import RegisterInput from './inputs/RegisterInput';
+import { hashPassword } from '../../../utils/auth';
+import User from '../../../entity/User';
+import RegisterInput from './Register.Input';
 
 // TODO: add email confirmation
 @Resolver()

@@ -1,10 +1,10 @@
 import { Resolver, Arg, Mutation, Ctx } from 'type-graphql';
 
-import User from '../../entity/User';
-import { comparePassword, createAccessToken, createRefreshToken } from '../../utils/auth';
-import LoginInput from './inputs/LoginInput';
-import LoginResponse from './responses/LoginResponse';
-import { MyContext } from '../../types/MyContext';
+import User from '../../../entity/User';
+import { comparePassword, createAccessToken, createRefreshToken } from '../../../utils/auth';
+import LoginInput from './Login.Input';
+import LoginResponse from './Login.Response';
+import { MyContext } from '../../../types/MyContext';
 
 @Resolver()
 export default class LoginResolver {
