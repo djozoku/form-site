@@ -45,6 +45,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/alt-text': [
       'warn',
