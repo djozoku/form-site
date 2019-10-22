@@ -44,7 +44,7 @@ export class UserValidator {
   public readonly isValidEmail: yup.StringSchema<string>;
   public readonly isValidUsername: yup.StringSchema<string>;
 
-  public constructor(existsTest: ExistsTest) {
+  private constructor(existsTest: ExistsTest) {
     this.isValidEmail = isValidEmail.test(
       'exists',
       'Tämä sähköposti on jo käytössä',
@@ -56,11 +56,13 @@ export class UserValidator {
       'Tämä käyttäjänimi on jo käytössä',
       (value: string) => existsTest('username', value)
     );
-
-    UserValidator.instance = this;
   }
 
   private static instance: UserValidator;
+
+  public static init(existsTest: ExistsTest) {
+    this.instance = new this(existsTest);
+  }
 
   public static get Instance() {
     if (!this.instance) {
@@ -73,11 +75,11 @@ export class UserValidator {
     return isValidPassword;
   }
 
-  public get schema(): yup.ObjectSchema<User> {
+  public static get schema(): yup.ObjectSchema<User> {
     return yup.object({
-      email: this.isValidEmail,
-      username: this.isValidUsername,
-      password: UserValidator.isValidPassword
+      email: this.instance.isValidEmail,
+      username: this.instance.isValidUsername,
+      password: this.isValidPassword
     });
   }
 }
