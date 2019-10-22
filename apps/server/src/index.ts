@@ -10,7 +10,7 @@ import { createConnection } from 'typeorm';
 
 import MailSender from './utils/sendmail';
 import UserResolvers from './resolvers/user';
-import { refreshToken } from './utils/auth';
+import { refreshToken, checkAuth } from './utils/auth';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -37,7 +37,11 @@ const main = async () => {
 
   app.post('/refresh_token', refreshToken);
 
-  const schema = await buildSchema({ resolvers: [...UserResolvers], validate: false });
+  const schema = await buildSchema({
+    resolvers: [...UserResolvers],
+    validate: true,
+    authChecker: checkAuth
+  });
 
   const server = new ApolloServer({ schema, context: ({ req, res }) => ({ req, res }) });
 
