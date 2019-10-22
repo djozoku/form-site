@@ -48,13 +48,13 @@ export class UserValidator {
     this.isValidEmail = isValidEmail.test(
       'exists',
       'Tämä sähköposti on jo käytössä',
-      (value: string) => existsTest('email', value)
+      async (value: string) => existsTest('email', value)
     );
 
     this.isValidUsername = isValidUsername.test(
       'exists',
       'Tämä käyttäjänimi on jo käytössä',
-      (value: string) => existsTest('username', value)
+      async (value: string) => existsTest('username', value)
     );
   }
 
