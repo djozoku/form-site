@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { AuthChecker } from 'type-graphql';
 import { Request, Response } from 'express';
 import { MyContext } from '../types/MyContext';
+import User from '../entity/User';
 
 interface JWTPayload {
   userId: number;
@@ -52,7 +53,10 @@ export const refreshToken = (req: Request, res: Response) => {
   }
   try {
     const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET!) as JWTPayload;
-    res.json({ ok: true, accessToken: createAccessToken(payload.userId) });
+    User.findOne(payload.userId).then((user) => {
+      if (!user) res.json({ ok: false, accessToken: '' });
+      else res.json({ ok: true, accessToken: createAccessToken(user.id) });
+    });
   } catch {
     res.json({ ok: false, accessToken: '' });
   }
