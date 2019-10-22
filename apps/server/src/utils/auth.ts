@@ -45,7 +45,6 @@ export const checkAuth: AuthChecker<MyContext> = ({ context } /* , roles */) => 
   }
 };
 
-// TODO: what if the user was deleted?
 export const refreshToken = (req: Request, res: Response) => {
   const token = req.cookies.xid;
   if (!token) {
