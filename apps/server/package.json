@@ -8,7 +8,6 @@
     "@form/validation": "1.0.0",
     "apollo-server-express": "^2.9.3",
     "bcryptjs": "^2.4.3",
-    "class-validator": "^0.10.1",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
