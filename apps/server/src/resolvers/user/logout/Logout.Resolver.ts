@@ -1,9 +1,11 @@
-import { Resolver, Mutation } from 'type-graphql';
+import { Resolver, Mutation, Ctx } from 'type-graphql';
+import { MyContext } from '../../../types/MyContext';
 
 @Resolver()
-export default class LoginResolver {
+export default class LogoutResolver {
   @Mutation(() => Boolean)
-  async logout(): Promise<boolean> {
+  async logout(@Ctx() { res }: MyContext): Promise<boolean> {
+    res.clearCookie('xid');
     return true;
   }
 }
