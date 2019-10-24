@@ -15,7 +15,7 @@ export const isValidPassword = yup
   .required('Salasana on pakollinen')
   .min(8, 'Salasanan täytyy olla vähintään 8 merkkiä pitkä')
   .max(255, 'Salasana ei saa olla pidempi kuin 255 merkkiä')
-  .test('whitespace', 'Salasana ei saa sisältää välilyöntiä', (value: string) => /\s/.test(value))
+  .test('whitespace', 'Salasana ei saa sisältää välilyöntiä', (value: string) => !/\s/.test(value))
   .test('uppercase', 'Salasanassa täytyy olla iso kirjain', (value: string) =>
     /[A-ZÅÄÖ]+/.test(value)
   )
