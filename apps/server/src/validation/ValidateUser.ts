@@ -10,7 +10,14 @@ import { UserValidator } from '@form/validation';
 import User from '../entity/User';
 
 UserValidator.init(async (property, value) => {
-  return User.findOne({ where: { [property]: value } }).then((val) => !!val);
+  if (property === 'username') {
+    console.log('username');
+    return User.findOne({ where: { username: value } }).then((val) => typeof val === 'undefined');
+  }
+  if (property === 'email') {
+    return User.findOne({ where: { email: value } }).then((val) => typeof val === 'undefined');
+  }
+  return false;
 });
 
 @ValidatorConstraint({ async: true })
