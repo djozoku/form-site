@@ -8,7 +8,12 @@ const isValidEmail = yup
 const isValidUsername = yup
   .string()
   .required('Käyttäjänimi on pakollinen')
-  .max(20, 'Käyttäjänimi ei saa olla enemmän kuin 20 merkkiä pitkä');
+  .max(20, 'Käyttäjänimi ei saa olla enemmän kuin 20 merkkiä pitkä')
+  .test(
+    'whitespace',
+    'Käyttäjänimi ei saa sisältää välilyöntiä',
+    (value: string) => !/\s/.test(value)
+  );
 
 export const isValidPassword = yup
   .string()
