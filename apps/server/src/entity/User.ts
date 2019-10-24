@@ -29,4 +29,7 @@ export default class User extends BaseEntity {
 
   @Column()
   confirmed: boolean;
+
+  @Column('int', { default: 0 })
+  tokenVersion: number;
 }

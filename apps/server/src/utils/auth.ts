@@ -7,6 +7,7 @@ import User from '../entity/User';
 
 interface JWTPayload {
   userId: number;
+  tokenVersion?: number;
 }
 
 export const hashPassword = async (password: string) => {
@@ -23,8 +24,8 @@ export const createAccessToken = (userId: number) => {
   });
 };
 
-export const createRefreshToken = (userId: number) => {
-  return jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET!, {
+export const createRefreshToken = (userId: number, tokenVersion: number) => {
+  return jwt.sign({ userId, tokenVersion }, process.env.JWT_REFRESH_SECRET!, {
     expiresIn: '7d'
   });
 };
@@ -45,18 +46,32 @@ export const checkAuth: AuthChecker<MyContext> = ({ context } /* , roles */) => 
   }
 };
 
+export const sendRefreshToken = (res: Response, token: string) => {
+  res.cookie('xid', token, {
+    httpOnly: true,
+    path: '/refresh_token'
+  });
+};
+
 export const refreshToken = (req: Request, res: Response) => {
+  const denyRefresh = () => {
+    res.json({ ok: false, accessToken: '' });
+  };
   const token = req.cookies.xid;
   if (!token) {
-    res.json({ ok: false, accessToken: '' });
+    denyRefresh();
   }
   try {
     const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET!) as JWTPayload;
     User.findOne(payload.userId).then((user) => {
-      if (!user) res.json({ ok: false, accessToken: '' });
-      else res.json({ ok: true, accessToken: createAccessToken(user.id) });
+      if (!user || user.tokenVersion !== payload.tokenVersion) {
+        denyRefresh();
+      } else {
+        sendRefreshToken(res, createRefreshToken(user.id, user.tokenVersion));
+        res.json({ ok: true, accessToken: createAccessToken(user.id) });
+      }
     });
   } catch {
-    res.json({ ok: false, accessToken: '' });
+    denyRefresh();
   }
 };
