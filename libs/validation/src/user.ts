@@ -3,10 +3,7 @@ import * as yup from 'yup';
 const isValidEmail = yup
   .string()
   .required('Sähköposti on pakollinen')
-  .email('Anna oikea sähköposti osoite')
-  .test('tavastia', 'Sähköpostin pitää loppua @kktavastia.fi', (value: string) =>
-    value.endsWith('@kktavastia.fi')
-  );
+  .email('Anna oikea sähköposti osoite');
 
 const isValidUsername = yup
   .string()
