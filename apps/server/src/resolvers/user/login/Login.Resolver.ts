@@ -28,6 +28,10 @@ export default class LoginResolver {
       throw new Error('Bad username or password');
     }
 
+    if (!user.confirmed) {
+      throw new Error('Email is not confirmed');
+    }
+
     sendRefreshToken(res, createRefreshToken(user.id, user.tokenVersion));
 
     return {
