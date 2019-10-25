@@ -60,16 +60,18 @@ export const refreshToken = (req: Request, res: Response) => {
   const token = req.cookies.xid;
   if (!token) {
     denyRefresh();
+    return;
   }
   try {
     const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET!) as JWTPayload;
     User.findOne(payload.userId).then((user) => {
       if (!user || user.tokenVersion !== payload.tokenVersion) {
         denyRefresh();
-      } else {
-        sendRefreshToken(res, createRefreshToken(user.id, user.tokenVersion));
-        res.json({ ok: true, accessToken: createAccessToken(user.id) });
+        return;
       }
+
+      sendRefreshToken(res, createRefreshToken(user.id, user.tokenVersion));
+      res.json({ ok: true, accessToken: createAccessToken(user.id) });
     });
   } catch {
     denyRefresh();
