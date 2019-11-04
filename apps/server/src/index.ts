@@ -7,6 +7,14 @@ import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
+import i18next from 'i18next';
+import i18nextMiddleware from 'i18next-express-middleware';
+
+import enCommon from '@form/i18n/lib/en/common.json';
+import enValidation from '@form/i18n/lib/en/validation.json';
+import fiCommon from '@form/i18n/lib/fi/common.json';
+import fiValidation from '@form/i18n/lib/fi/validation.json';
+import { formatFunc } from '@form/i18n';
 
 import MailSender from './utils/sendmail';
 import UserResolvers from './resolvers/user';
@@ -30,10 +38,32 @@ const main = async () => {
 
   await MailSender.init();
 
+  i18next.use(i18nextMiddleware.LanguageDetector).init({
+    detection: {
+      order: ['header'],
+      caches: false
+    },
+    resources: {
+      en: {
+        common: enCommon,
+        validation: enValidation
+      },
+      fi: {
+        common: fiCommon,
+        validation: fiValidation
+      }
+    },
+    fallbackLng: ['en'],
+    interpolation: {
+      format: formatFunc
+    }
+  });
+
   const app = express();
 
   app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
   app.use(cookieParser());
+  app.use(i18nextMiddleware.handle(i18next));
 
   app.post('/refresh_token', refreshToken);
 
