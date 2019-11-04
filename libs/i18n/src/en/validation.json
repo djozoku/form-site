@@ -1,0 +1,11 @@
+{
+  "required": "{{field}} is required",
+  "realemail": "Type in a real email address",
+  "length": "{{field}} must be {{range}} characters long",
+  "whitespace": "{{field}} must not contain spaces",
+  "uppercase": "{{field}} must contain at least one uppercase letter",
+  "lowercase": "{{field}} must contain at least one lowercase letter",
+  "number": "{{field}} must contain at least one number",
+  "special": "{{field}} must contain at least one special character",
+  "exists": "This {{field, lower}} already exists"
+}

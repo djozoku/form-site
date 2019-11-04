@@ -1,0 +1,11 @@
+{
+  "required": "{{field}} on pakollinen",
+  "realemail": "Anna oikea sähköposti osoite",
+  "length": "{{field, own}} täytyy olla {{range}} merkkiä pitkä",
+  "whitespace": "{{field}} ei saa sisältää välilyöntiä",
+  "uppercase": "{{field, in}} täytyy olla vähintään yksi iso kirjain",
+  "lowercase": "{{field, in}} täytyy olla vähintään yksi pieni kirjain",
+  "number": "{{field, in}} täytyy olla vähintään yksi numero",
+  "special": "{{field, in}} täytyy olla vähintään yksi erikoismerkki",
+  "exists": "Tämä {{field, lower}} on jo käytössä"
+}
