@@ -31,7 +31,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/button-has-type': 'off',
-    'import/no-extraneous-dependencies': 'off',
     'global-require': 'off',
     'no-useless-constructor': 'off',
     'no-console': 'off',

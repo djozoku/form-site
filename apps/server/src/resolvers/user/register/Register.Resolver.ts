@@ -7,7 +7,6 @@ import sendConfirmationEmail from '../../../utils/sendConfirmationEmail';
 
 import uuid = require('uuid');
 
-// TODO: add email confirmation
 @Resolver()
 export default class RegisterResolver {
   @Mutation(() => User)

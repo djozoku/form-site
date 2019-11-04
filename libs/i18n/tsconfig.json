@@ -7,9 +7,11 @@
     "declaration": true,
     "outDir": "lib",
     "declarationDir": "types",
-    "rootDir": "."
+    "rootDir": "src",
+    "resolveJsonModule": true
   },
   "include": [
-    "./src/**/*.ts"
+    "src/**/*.json",
+    "src/**/*.ts"
   ]
 }

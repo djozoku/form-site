@@ -1,36 +1,30 @@
 import * as yup from 'yup';
+import * as messages from './messages';
+
+const whitespaceTest = (value: string) => !/\s/.test(value);
 
 const isValidEmail = yup
   .string()
-  .required('Sähköposti on pakollinen')
-  .email('Anna oikea sähköposti osoite');
+  .required(messages.required('email'))
+  .email(messages.realEmail);
 
 const isValidUsername = yup
   .string()
-  .required('Käyttäjänimi on pakollinen')
-  .max(20, 'Käyttäjänimi ei saa olla enemmän kuin 20 merkkiä pitkä')
-  .test(
-    'whitespace',
-    'Käyttäjänimi ei saa sisältää välilyöntiä',
-    (value: string) => !/\s/.test(value)
-  );
+  .required(messages.required('username'))
+  .min(3, messages.length('username', '3-20'))
+  .max(20, messages.length('username', '3-20'))
+  .test('whitespace', messages.whitespace('username'), whitespaceTest);
 
-export const isValidPassword = yup
+const isValidPassword = yup
   .string()
-  .required('Salasana on pakollinen')
-  .min(8, 'Salasanan täytyy olla vähintään 8 merkkiä pitkä')
-  .max(255, 'Salasana ei saa olla pidempi kuin 255 merkkiä')
-  .test('whitespace', 'Salasana ei saa sisältää välilyöntiä', (value: string) => !/\s/.test(value))
-  .test('uppercase', 'Salasanassa täytyy olla iso kirjain', (value: string) =>
-    /[A-ZÅÄÖ]+/.test(value)
-  )
-  .test('lowercase', 'Salasanassa täytyy olla pieni kirjain', (value: string) =>
-    /[a-zåäö]+/.test(value)
-  )
-  .test('number', 'Salasanassa täytyy olla vähintään yksi numero', (value: string) =>
-    /\d+/.test(value)
-  )
-  .test('special', 'Salasanassa täytyy olla erikoismerkki', (value: string) =>
+  .required(messages.required('password'))
+  .min(8, messages.length('password', '8-255'))
+  .max(255, messages.length('password', '8-255'))
+  .test('whitespace', messages.whitespace('password'), whitespaceTest)
+  .test('uppercase', messages.uppercase('password'), (value: string) => /[A-ZÅÄÖ]+/.test(value))
+  .test('lowercase', messages.lowercase('password'), (value: string) => /[a-zåäö]+/.test(value))
+  .test('number', messages.number('password'), (value: string) => /\d+/.test(value))
+  .test('special', messages.special('password'), (value: string) =>
     /[$&+,:;=?@#¤/\\|´`§_~{}[\]'"<>.^*()%!-]+/.test(value)
   );
 
@@ -49,13 +43,13 @@ export class UserValidator {
   private constructor(existsTest: ExistsTest) {
     this.isValidEmail = isValidEmail.test(
       'exists',
-      'Tämä sähköposti on jo käytössä',
+      messages.exists('email'),
       async (value: string) => existsTest('email', value)
     );
 
     this.isValidUsername = isValidUsername.test(
       'exists',
-      'Tämä käyttäjänimi on jo käytössä',
+      messages.exists('username'),
       async (value: string) => existsTest('username', value)
     );
   }
