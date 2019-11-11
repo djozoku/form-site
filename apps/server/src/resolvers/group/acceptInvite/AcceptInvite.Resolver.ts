@@ -11,18 +11,18 @@ import { MyContext } from '~/types/MyContext';
 export default class AcceptInviteResolver {
   @Mutation(() => Boolean)
   async acceptInvite(@Arg('group') groupName: string, @Ctx() { userId }: MyContext) {
-    const user = await User.findOne(userId);
-    const group = await Group.findOne({ where: { name: groupName } });
+    const user = await User.findOne(userId, { relations: ['groups'] });
+    const group = await Group.findOne({ where: { name: groupName }, relations: ['members'] });
     const invite = await Invite.findOne({ where: { group: { name: groupName } } });
 
     if (!group) return false;
     if (!user) return false;
     if (!invite) return false;
 
-    group.members.push(user);
+    group.members!.push(user);
     getManager().save(group);
 
-    user.groups.push(group);
+    user.groups!.push(group);
     getManager().save(user);
 
     invite.remove();
