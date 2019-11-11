@@ -38,11 +38,11 @@ export default class User extends BaseEntity implements IUser {
   @Column('int', { default: 0 })
   tokenVersion: number;
 
-  @Field(() => [Group])
+  @Field(() => [Group], { nullable: true })
   @OneToMany(() => Group, (group) => group.owner)
-  ownedGroups: Group[];
+  ownedGroups?: Group[];
 
-  @Field(() => [Group])
+  @Field(() => [Group], { nullable: true })
   @ManyToMany(() => Group, (group) => group.members)
-  groups: Group[];
+  groups?: Group[];
 }
