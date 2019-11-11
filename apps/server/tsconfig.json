@@ -5,7 +5,21 @@
     "module": "commonjs",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "composite": true
+    "composite": true,
+    "baseUrl": "src",
+    "paths": {
+      "~/*": [
+        "./*"
+      ],
+      "@entities/*": [
+        "entity/*"
+      ],
+      "@resolvers/*": [
+        "resolvers/*"
+      ]
+    },
+    "outDir": "dist",
+    "rootDir": "src"
   },
   "include": [
     "src/**/*.ts"

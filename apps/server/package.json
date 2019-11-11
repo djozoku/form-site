@@ -20,6 +20,7 @@
     "nodemailer": "^6.3.0",
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
+    "tsconfig-paths": "^3.9.0",
     "type-graphql": "^0.17.5",
     "typeorm": "^0.2.19",
     "uuid": "^3.3.3"
@@ -40,7 +41,7 @@
     "typescript": "^3.6.3"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts"
   }
 }
