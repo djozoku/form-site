@@ -9,7 +9,7 @@ import { MyContext } from '~/types/MyContext';
 @Resolver()
 export default class CreateGroupResolver {
   @Authorized()
-  @Mutation(() => Group, { nullable: true })
+  @Mutation(() => Boolean, { nullable: true })
   async createGroup(@Arg('name') name: string, @Ctx() { userId }: MyContext) {
     const user = await User.findOne(userId);
     if (await Group.findOne({ where: { name } })) {
