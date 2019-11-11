@@ -5,8 +5,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@form/validation": "1.0.0",
     "@form/i18n": "1.0.0",
+    "@form/interfaces": "1.0.0",
+    "@form/validation": "1.0.0",
     "apollo-server-express": "^2.9.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",
