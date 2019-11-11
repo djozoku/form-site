@@ -16,9 +16,10 @@ import fiCommon from '@form/i18n/lib/fi/common.json';
 import fiValidation from '@form/i18n/lib/fi/validation.json';
 import { formatFunc } from '@form/i18n';
 
+import { refreshToken, checkAuth } from './utils/auth';
 import MailSender from './utils/sendmail';
 import UserResolvers from './resolvers/user';
-import { refreshToken, checkAuth } from './utils/auth';
+import GroupResolvers from './resolvers/group';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -68,7 +69,7 @@ const main = async () => {
   app.post('/refresh_token', refreshToken);
 
   const schema = await buildSchema({
-    resolvers: [...UserResolvers],
+    resolvers: [...UserResolvers, ...GroupResolvers],
     validate: true,
     authChecker: checkAuth
   });
