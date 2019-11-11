@@ -1,0 +1,11 @@
+{
+  "name": "@form/interfaces",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "typings": "types",
+  "license": "Apache 2.0",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
+}
