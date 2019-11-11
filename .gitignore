@@ -4,5 +4,6 @@ node_modules
 libs/*/lib
 libs/*/types
 tsconfig.tsbuildinfo
+dist
 # secret files
 .env
