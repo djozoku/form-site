@@ -35,7 +35,7 @@ module.exports = {
     'global-require': 'off',
     'no-useless-constructor': 'off',
     'no-console': 'off',
-    'lines-between-class-members': ["error", "always", { exceptAfterSingleLine: true }],
+    'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
     'class-methods-use-this': 'off',
     'prefer-destructuring': 'off',
     'prettier/prettier': 'error',
@@ -82,6 +82,6 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-var-requires': 'off'
       }
-    },
+    }
   ]
 };
