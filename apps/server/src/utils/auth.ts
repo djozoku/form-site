@@ -2,8 +2,10 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { AuthChecker } from 'type-graphql';
 import { Request, Response } from 'express';
-import { MyContext } from '../types/MyContext';
-import User from '../entity/User';
+
+import User from '@entities/User';
+
+import { MyContext } from '~/types/MyContext';
 
 interface JWTPayload {
   userId: number;

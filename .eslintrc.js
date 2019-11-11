@@ -31,10 +31,11 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/button-has-type': 'off',
+    'import/no-unresolved': 'off',
     'global-require': 'off',
     'no-useless-constructor': 'off',
     'no-console': 'off',
-    'lines-between-class-members': ["error", "always", { exceptAfterSingleLine: true }],
+    'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
     'class-methods-use-this': 'off',
     'prefer-destructuring': 'off',
     'prettier/prettier': 'error',
@@ -81,6 +82,6 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-var-requires': 'off'
       }
-    },
+    }
   ]
 };

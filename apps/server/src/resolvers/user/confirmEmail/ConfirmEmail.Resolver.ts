@@ -1,6 +1,7 @@
 import { Resolver, Arg, Mutation } from 'type-graphql';
-import EmailConfirmation from '../../../entity/EmailConfirmation';
-import User from '../../../entity/User';
+
+import EmailConfirmation from '@entities/EmailConfirmation';
+import User from '@entities/User';
 
 @Resolver()
 export default class ConfirmEmailResolver {

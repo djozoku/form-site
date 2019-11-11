@@ -1,10 +1,14 @@
 import { Resolver, Mutation, Arg } from 'type-graphql';
-import { hashPassword } from '../../../utils/auth';
-import User from '../../../entity/User';
-import RegisterInput from './Register.Input';
-import EmailConfirmation from '../../../entity/EmailConfirmation';
-import sendConfirmationEmail from '../../../utils/sendConfirmationEmail';
 
+import EmailConfirmation from '@entities/EmailConfirmation';
+import User from '@entities/User';
+
+import sendConfirmationEmail from '~/utils/sendConfirmationEmail';
+import { hashPassword } from '~/utils/auth';
+
+import RegisterInput from './Register.Input';
+
+// FIXME: FIX THIS!!!
 import uuid = require('uuid');
 
 @Resolver()

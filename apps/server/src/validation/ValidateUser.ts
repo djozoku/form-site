@@ -7,8 +7,10 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments
 } from 'class-validator';
+
 import { UserValidator } from '@form/validation';
-import User from '../entity/User';
+
+import User from '@entities/User';
 
 UserValidator.init(async (property, value) => {
   if (property === 'username') {
