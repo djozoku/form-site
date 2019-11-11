@@ -7,9 +7,9 @@
     "declaration": true,
     "outDir": "lib",
     "declarationDir": "types",
-    "rootDir": "."
+    "rootDir": "src"
   },
   "include": [
-    "./src/**/*.ts"
+    "src/**/*.ts"
   ]
 }
