@@ -1,0 +1,5 @@
+/libs/*/lib/**/*.js
+/libs/*/types/**/*.ts
+node_modules
+dist/**/*.js
+dist/**/*.ts
