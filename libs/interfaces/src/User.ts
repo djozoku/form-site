@@ -7,6 +7,6 @@ export interface User {
   lastName: string;
   username: string;
   email: string;
-  ownedGroups: Group[];
-  groups: Group[];
+  ownedGroups?: Group[];
+  groups?: Group[];
 }

@@ -9,6 +9,6 @@ export default class MeResolver {
   @Authorized()
   @Query(() => User, { nullable: true })
   async me(@Ctx() { userId }: MyContext) {
-    return User.findOne(userId!);
+    return User.findOne(userId!, { relations: ['ownedGroups', 'groups'] });
   }
 }
