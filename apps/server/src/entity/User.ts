@@ -1,9 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+/* eslint-disable import/no-cycle */
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, OneToMany } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
+
+import { User as IUser } from '@form/interfaces/types/User';
+
+import Group from './Group';
 
 @ObjectType()
 @Entity()
-export default class User extends BaseEntity {
+export default class User extends BaseEntity implements IUser {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
@@ -32,4 +37,12 @@ export default class User extends BaseEntity {
 
   @Column('int', { default: 0 })
   tokenVersion: number;
+
+  @Field(() => [Group])
+  @OneToMany(() => Group, (group) => group.owner)
+  ownedGroups: Group[];
+
+  @Field(() => [Group])
+  @ManyToMany(() => Group, (group) => group.members)
+  groups: Group[];
 }
