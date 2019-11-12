@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 dist
 # secret files
 .env
+graphql.ts

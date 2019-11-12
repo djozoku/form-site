@@ -6,6 +6,6 @@
   "license": "Apache 2.0",
   "private": true,
   "devDependencies": {
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   }
 }

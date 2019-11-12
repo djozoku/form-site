@@ -27,6 +27,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
+    'react/jsx-indent': 'off',
+    'react/jsx-wrap-multilines': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',

@@ -11,7 +11,7 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "build": "tsc",
