@@ -76,7 +76,7 @@ const main = async () => {
 
   const server = new ApolloServer({ schema, context: ({ req, res }) => ({ req, res }) });
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   app.listen(4000, () => {
     console.log('Server Started on http://localhost:4000/graphql');
