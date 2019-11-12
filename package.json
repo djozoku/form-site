@@ -5,20 +5,20 @@
     "libs/*"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.3.0",
-    "@typescript-eslint/parser": "^2.3.0",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
     "concurrently": "^5.0.0",
-    "eslint": "^6.4.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.3.0",
+    "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^2.0.1",
-    "lerna": "^3.16.4",
-    "prettier": "^1.18.2",
-    "typescript": "^3.6.3"
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.2.0",
+    "lerna": "^3.18.4",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "db:up": "yarn db:start && node sleep.js 10 && yarn db:create",
