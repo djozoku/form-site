@@ -14,14 +14,10 @@ import uuid = require('uuid');
 @Resolver()
 export default class RegisterResolver {
   @Mutation(() => User)
-  async register(@Arg('user')
-  {
-    email,
-    firstName,
-    lastName,
-    username,
-    password
-  }: RegisterInput): Promise<User> {
+  async register(
+    @Arg('user')
+    { email, firstName, lastName, username, password }: RegisterInput
+  ): Promise<User> {
     const hashedPassword = await hashPassword(password);
 
     const user = await User.create({

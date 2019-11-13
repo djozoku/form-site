@@ -26,11 +26,17 @@ export default class Group extends BaseEntity implements IGroup {
   name: string;
 
   @Field(() => User, { nullable: true })
-  @ManyToOne(() => User, (user) => user.ownedGroups)
+  @ManyToOne(
+    () => User,
+    (user) => user.ownedGroups
+  )
   owner?: User;
 
   @Field(() => [User], { nullable: true })
-  @ManyToMany(() => User, (user) => user.groups)
+  @ManyToMany(
+    () => User,
+    (user) => user.groups
+  )
   @JoinTable()
   members?: User[];
 }
