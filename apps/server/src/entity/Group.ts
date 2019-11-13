@@ -13,6 +13,7 @@ import { ObjectType, Field, ID } from 'type-graphql';
 import { Group as IGroup } from '@form/interfaces/types/Group';
 
 import User from './User';
+import Form from './Form';
 
 @ObjectType()
 @Entity()
@@ -39,4 +40,11 @@ export default class Group extends BaseEntity implements IGroup {
   )
   @JoinTable()
   members?: User[];
+
+  @Field(() => [Form], { nullable: true })
+  @ManyToOne(
+    () => Form,
+    (form) => form.owner
+  )
+  forms?: Form[];
 }
