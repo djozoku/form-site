@@ -6,7 +6,11 @@ import client from './apollo';
 import Layout from './components/Layout';
 
 const IndexPage: React.FC<{ path: string }> = () => {
-  return <Layout>Content</Layout>;
+  return (
+    <Layout>
+      <div style={{ minHeight: 1000 }}>Content</div>
+    </Layout>
+  );
 };
 
 const App: React.FC = () => {
