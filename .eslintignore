@@ -1,5 +1,7 @@
 /libs/*/lib/**/*.js
 /libs/*/types/**/*.ts
 node_modules
-dist/**/*.js
-dist/**/*.ts
+/apps/*/dist/**/*.js
+/apps/*/dist/**/*.ts
+serviceWorker.ts
+react-app-env.d.ts
