@@ -13,7 +13,10 @@
     "outDir": "lib",
     "declarationDir": "types",
     "jsx": "react",
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": [
+      "react"
+    ]
   },
   "include": [
     "src/**/*.ts"
