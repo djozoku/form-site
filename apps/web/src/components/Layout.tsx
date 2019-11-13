@@ -8,7 +8,17 @@ const { Header, Content, Footer } = AntdLayout;
 const Layout: React.FC = ({ children }) => {
   return (
     <AntdLayout className="layout">
-      <Header style={{ height: '48px', background: '#fff', padding: '0' }}>
+      <Header
+        style={{
+          height: '48px',
+          background: '#fff',
+          padding: '0',
+          position: 'sticky',
+          zIndex: 1,
+          width: '100%',
+          top: 0
+        }}
+      >
         <Navigation />
       </Header>
       <Content style={{ padding: '0 50px' }}>
