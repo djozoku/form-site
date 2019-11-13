@@ -5,12 +5,12 @@ import User from '@entities/User';
 import Group from '@entities/Group';
 import Invite from '@entities/Invite';
 
-import { MyContext } from '~/types/MyContext';
+import { GraphQLContext } from '~/types/GraphQLContext';
 
 @Resolver()
 export default class AcceptInviteResolver {
   @Mutation(() => Boolean)
-  async acceptInvite(@Arg('group') groupName: string, @Ctx() { userId }: MyContext) {
+  async acceptInvite(@Arg('group') groupName: string, @Ctx() { userId }: GraphQLContext) {
     const user = await User.findOne(userId, { relations: ['groups'] });
     const group = await Group.findOne({ where: { name: groupName }, relations: ['members'] });
     const invite = await Invite.findOne({ where: { group: { name: groupName } } });

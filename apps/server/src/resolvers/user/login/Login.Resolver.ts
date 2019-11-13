@@ -8,7 +8,7 @@ import {
   createRefreshToken,
   sendRefreshToken
 } from '~/utils/auth';
-import { MyContext } from '~/types/MyContext';
+import { GraphQLContext } from '~/types/GraphQLContext';
 
 import LoginInput from './Login.Input';
 import LoginResponse from './Login.Response';
@@ -18,7 +18,7 @@ export default class LoginResolver {
   @Mutation(() => LoginResponse, { nullable: true })
   async login(
     @Arg('user') { username, password }: LoginInput,
-    @Ctx() { res }: MyContext
+    @Ctx() { res }: GraphQLContext
   ): Promise<LoginResponse> {
     const user = await User.findOne({ where: { username } });
 

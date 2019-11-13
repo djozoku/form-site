@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 
 import User from '@entities/User';
 
-import { MyContext } from '~/types/MyContext';
+import { GraphQLContext } from '~/types/GraphQLContext';
 
 interface JWTPayload {
   userId: number;
@@ -32,7 +32,7 @@ export const createRefreshToken = (userId: number, tokenVersion: number) => {
   });
 };
 
-export const checkAuth: AuthChecker<MyContext> = ({ context } /* , roles */) => {
+export const checkAuth: AuthChecker<GraphQLContext> = ({ context } /* , roles */) => {
   const authorization = context.req.headers.authorization;
   if (!authorization) {
     throw new Error('Not Authenticated');
