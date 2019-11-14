@@ -34,6 +34,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/button-has-type': 'off',
     'import/no-unresolved': 'off',
+    'import/prefer-default-export': 'off',
     'global-require': 'off',
     'no-useless-constructor': 'off',
     'no-console': 'off',
