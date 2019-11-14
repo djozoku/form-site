@@ -26,6 +26,12 @@
   ],
   "references": [
     {
+      "path": "../../libs/i18n"
+    },
+    {
+      "path": "../../libs/interfaces"
+    },
+    {
       "path": "../../libs/validation"
     }
   ]
