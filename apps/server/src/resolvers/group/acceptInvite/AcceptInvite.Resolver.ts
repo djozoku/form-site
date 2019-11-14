@@ -15,9 +15,7 @@ export default class AcceptInviteResolver {
     const group = await Group.findOne({ where: { name: groupName }, relations: ['members'] });
     const invite = await Invite.findOne({ where: { group: { name: groupName } } });
 
-    if (!group) return false;
-    if (!user) return false;
-    if (!invite) return false;
+    if (!group || !user || !invite) return false;
 
     group.members!.push(user);
     getManager().save(group);
