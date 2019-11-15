@@ -1,8 +1,8 @@
 import { Query, Resolver, Ctx, Authorized } from 'type-graphql';
 
-import User from '@entities/User';
-
 import { GraphQLContext } from '~/types/GraphQLContext';
+
+import User from './User.Entity';
 
 @Resolver()
 export default class MeResolver {

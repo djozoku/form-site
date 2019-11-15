@@ -1,10 +1,9 @@
 import { Resolver, Mutation, Arg } from 'type-graphql';
 
-import EmailConfirmation from '@entities/EmailConfirmation';
-import User from '@entities/User';
-
-import sendConfirmationEmail from '~/utils/sendConfirmationEmail';
-import { hashPassword } from '~/utils/auth';
+import EmailConfirmation from '@module/user/emailConfirm/EmailConfirm.Entity';
+import { sendConfirmationEmail } from '@module/user/emailConfirm/EmailConfirm.Utils';
+import User from '@module/user/User.Entity';
+import { hashPassword } from '@module/user/auth/Auth.Utils';
 
 import RegisterInput from './Register.Input';
 

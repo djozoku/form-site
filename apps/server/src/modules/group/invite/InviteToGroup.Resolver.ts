@@ -1,9 +1,10 @@
 import { Resolver, Authorized, Mutation, Arg } from 'type-graphql';
 import { getManager } from 'typeorm';
 
-import User from '@entities/User';
-import Group from '@entities/Group';
-import Invite from '@entities/Invite';
+import User from '@module/user/User.Entity';
+import Group from '@module/group/Group.Entity';
+
+import Invite from './Invite.Entity';
 
 @Resolver()
 export default class InviteToGroupResolver {

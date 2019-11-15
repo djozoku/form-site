@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn, Column, BaseEntity } from 'typeorm';
 
 @Entity()
-export default class EmailConfirmation extends BaseEntity {
+export default class EmailConfirm extends BaseEntity {
   @PrimaryColumn('text', { unique: true })
   id: string;
 

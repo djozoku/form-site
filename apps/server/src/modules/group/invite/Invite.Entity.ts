@@ -1,7 +1,7 @@
 import { Entity, BaseEntity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-import Group from './Group';
-import User from './User';
+import Group from '@module/group/Group.Entity';
+import User from '@module/user/User.Entity';
 
 @Entity()
 export default class Invite extends BaseEntity {

@@ -16,10 +16,12 @@ import fiCommon from '@form/i18n/lib/fi/common.json';
 import fiValidation from '@form/i18n/lib/fi/validation.json';
 import { formatFunc } from '@form/i18n';
 
-import { refreshToken, checkAuth } from './utils/auth';
+import UserModule from '@module/user/User.Module';
+import GroupModule from '@module/group/Group.Module';
+import FormModule from '@module/form/Form.Module';
+import { AuthUtils } from '@module/user/auth/Auth.Module';
+
 import MailSender from './utils/sendmail';
-import UserResolvers from './resolvers/user';
-import GroupResolvers from './resolvers/group';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -33,7 +35,7 @@ const main = async () => {
     password: process.env.DB_PASSWORD || 'postgres',
     database: process.env.DB_DATABASE || 'form-db',
     synchronize: isDev || false,
-    entities: [`${__dirname}/entity/*.*`],
+    entities: [`${__dirname}/modules/**/*.Entity.*`],
     logging: isDev ? true : undefined
   });
 
@@ -66,12 +68,12 @@ const main = async () => {
   app.use(cookieParser());
   app.use(i18nextMiddleware.handle(i18next));
 
-  app.post('/refresh_token', refreshToken);
+  app.post('/refresh_token', AuthUtils.refreshToken);
 
   const schema = await buildSchema({
-    resolvers: [...UserResolvers, ...GroupResolvers],
+    resolvers: [...UserModule.Resolvers, ...GroupModule.Resolvers, ...FormModule.Resolvers],
     validate: true,
-    authChecker: checkAuth
+    authChecker: AuthUtils.checkAuth
   });
 
   const server = new ApolloServer({ schema, context: ({ req, res }) => ({ req, res }) });

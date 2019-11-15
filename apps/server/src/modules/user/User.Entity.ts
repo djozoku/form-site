@@ -4,7 +4,7 @@ import { ObjectType, Field, ID } from 'type-graphql';
 
 import { User as IUser } from '@form/interfaces/types/User';
 
-import Group from './Group';
+import Group from '@module/group/Group.Entity';
 
 @ObjectType()
 @Entity()

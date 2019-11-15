@@ -12,8 +12,8 @@ import { ObjectType, Field, ID } from 'type-graphql';
 
 import { Group as IGroup } from '@form/interfaces/types/Group';
 
-import User from './User';
-import Form from './Form';
+import User from '@module/user/User.Entity';
+import Form from '@module/form/Form.Entity';
 
 @ObjectType()
 @Entity()

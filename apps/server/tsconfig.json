@@ -11,15 +11,25 @@
       "~/*": [
         "./*"
       ],
-      "@entities/*": [
-        "entity/*"
-      ],
-      "@resolvers/*": [
-        "resolvers/*"
+      "@module/*": [
+        "modules/*"
       ]
     },
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": [
+      "bcryptjs",
+      "cookie-parser",
+      "cors",
+      "dotenv",
+      "express",
+      "jsonwebtoken",
+      "node",
+      "nodemailer",
+      "pg",
+      "sql-bricks",
+      "uuid"
+    ]
   },
   "include": [
     "src/**/*.ts"

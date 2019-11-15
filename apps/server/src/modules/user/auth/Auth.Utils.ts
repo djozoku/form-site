@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { AuthChecker } from 'type-graphql';
 import { Request, Response } from 'express';
 
-import User from '@entities/User';
+import User from '@module/user/User.Entity';
 
 import { GraphQLContext } from '~/types/GraphQLContext';
 

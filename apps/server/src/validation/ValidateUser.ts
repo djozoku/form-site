@@ -10,7 +10,7 @@ import {
 
 import { UserValidator } from '@form/validation';
 
-import User from '@entities/User';
+import User from '@module/user/User.Entity';
 
 UserValidator.init(async (property, value) => {
   if (property === 'username') {

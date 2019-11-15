@@ -8,6 +8,6 @@
   "database": "form-db",
   "synchronize": true,
   "entities": [
-    "dist/entity/*.*"
+    "dist/modules/**/*.Entity.*"
   ]
 }

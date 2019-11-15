@@ -1,10 +1,11 @@
 import { Authorized, Mutation, Resolver, Arg, Ctx } from 'type-graphql';
 import { getManager } from 'typeorm';
 
-import Group from '@entities/Group';
-import User from '@entities/User';
+import User from '@module/user/User.Entity';
 
 import { GraphQLContext } from '~/types/GraphQLContext';
+
+import Group from './Group.Entity';
 
 @Resolver()
 export default class CreateGroupResolver {

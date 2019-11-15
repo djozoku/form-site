@@ -1,13 +1,13 @@
 import { Resolver, Arg, Mutation, Ctx } from 'type-graphql';
 
-import User from '@entities/User';
-
+import User from '@module/user/User.Entity';
 import {
   comparePassword,
   createAccessToken,
   createRefreshToken,
   sendRefreshToken
-} from '~/utils/auth';
+} from '@module/user/auth/Auth.Utils';
+
 import { GraphQLContext } from '~/types/GraphQLContext';
 
 import LoginInput from './Login.Input';

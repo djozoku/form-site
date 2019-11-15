@@ -1,6 +1,6 @@
-import MailSender from './sendmail';
+import MailSender from '~/utils/sendmail';
 
-const sendConfirmationEmail = (email: string, url: string) => {
+export const sendConfirmationEmail = (email: string, url: string) => {
   MailSender.send({
     from: 'Form Site <no-reply@form-site.io>',
     to: email,
@@ -9,5 +9,3 @@ const sendConfirmationEmail = (email: string, url: string) => {
     text: url
   });
 };
-
-export default sendConfirmationEmail;
