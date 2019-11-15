@@ -36,7 +36,7 @@
     "build:lib:validation": "yarn --cwd libs/validation tsc",
     "db:up": "yarn db:start && node sleep.js 10 && yarn db:create",
     "db:down": "yarn db:stop && node sleep.js 1 && yarn db:rm",
-    "db:start": "docker run --name form-postgres -e POSTGRES_PASSWORD=ozokudev -p 5432:5432 -d postgres",
+    "db:start": "docker run --name form-postgres -e POSTGRES_PASSWORD=ozokudev -p 5432:5432 -d postgres:11",
     "db:create": "docker exec -it form-postgres runuser -l postgres -c \"createdb form-db\"",
     "db:stop": "docker stop form-postgres",
     "db:rm": "docker rm form-postgres",
