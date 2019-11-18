@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout as AntdLayout, Breadcrumb } from 'antd';
+import { Location } from '@reach/router';
 
 import Navigation from './Navigation';
 
@@ -21,13 +22,36 @@ const Layout: React.FC = ({ children }) => {
       >
         <Navigation />
       </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>{children}</div>
+      <Content style={{ padding: '0 50px', height: '100%' }}>
+        <Location>
+          {({ location }) => {
+            const [_, ...path] = location.pathname.split('/');
+            let breadcrumb;
+            if (path.length === 1 && path[0] === '')
+              breadcrumb = (
+                <>
+                  <Breadcrumb.Item>Home</Breadcrumb.Item>
+                </>
+              );
+            else
+              breadcrumb = (
+                <>
+                  {path.map((p) => {
+                    const [f, ...other] = p.split('');
+                    return (
+                      <Breadcrumb.Item>{[f.toUpperCase(), ...other].join('')}</Breadcrumb.Item>
+                    );
+                  })}
+                </>
+              );
+            return (
+              <>
+                <Breadcrumb style={{ margin: '16px 0' }}>{breadcrumb}</Breadcrumb>
+                <div style={{ background: '#fff', padding: 24, height: '100%' }}>{children}</div>
+              </>
+            );
+          }}
+        </Location>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Form Site</Footer>
     </AntdLayout>
