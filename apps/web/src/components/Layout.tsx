@@ -39,7 +39,9 @@ const Layout: React.FC = ({ children }) => {
                   {path.map((p) => {
                     const [f, ...other] = p.split('');
                     return (
-                      <Breadcrumb.Item>{[f.toUpperCase(), ...other].join('')}</Breadcrumb.Item>
+                      <Breadcrumb.Item key={p}>
+                        {[f.toUpperCase(), ...other].join('')}
+                      </Breadcrumb.Item>
                     );
                   })}
                 </>
