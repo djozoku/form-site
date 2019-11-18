@@ -50,7 +50,7 @@
     "devlib-i18n": "yarn --cwd libs/i18n tsc --watch",
     "devlib-interfaces": "yarn --cwd libs/interfaces tsc --watch",
     "devlib-validation": "yarn --cwd libs/validation tsc --watch",
-    "generate:web": "graphql-codegen --config apps/web/codegen.yml",
+    "generate:web": "yarn --cwd apps/web generate",
     "lint": "eslint --ext ts,tsx,js ."
   }
 }
