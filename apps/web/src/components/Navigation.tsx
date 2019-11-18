@@ -58,7 +58,7 @@ const Navigation: React.FC = () => {
             onMouseEnter={onHover}
             onMouseLeave={onHover}
           >
-            <Typography.Text style={{ paddingRight: '20px' }}>Ozoku</Typography.Text>
+                  <Typography.Text style={{ paddingRight: '20px' }}>Account</Typography.Text>
             <Avatar icon="user" style={{ position: 'relative', right: '8px', top: '-2px' }} />
           </div>
         </Dropdown>
