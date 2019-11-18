@@ -7,7 +7,7 @@ const { Header, Content, Footer } = AntdLayout;
 
 const Layout: React.FC = ({ children }) => {
   return (
-    <AntdLayout className="layout">
+    <AntdLayout className="layout" style={{ height: '100%' }}>
       <Header
         style={{
           height: '48px',

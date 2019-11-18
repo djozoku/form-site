@@ -16,7 +16,7 @@ const IndexPage: React.FC<{ path: string }> = () => {
 const App: React.FC = () => {
   return (
     <ApolloProvider client={client}>
-      <Router>
+      <Router style={{ height: '100%' }}>
         <IndexPage path="/" />
       </Router>
     </ApolloProvider>
