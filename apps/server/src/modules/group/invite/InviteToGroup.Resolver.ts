@@ -11,6 +11,7 @@ export default class InviteToGroupResolver {
   @Authorized()
   @Mutation(() => Boolean)
   async inviteToGroup(@Arg('group') groupName: string, @Arg('username') username: string) {
+    // FIXME: we don't check if user is already in the group
     const group = await Group.findOne({ where: { name: groupName } });
     const user = await User.findOne({ where: { username } });
 

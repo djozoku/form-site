@@ -14,6 +14,7 @@ export default class AcceptInviteResolver {
   async acceptInvite(@Arg('group') groupName: string, @Ctx() { userId }: GraphQLContext) {
     const user = await User.findOne(userId, { relations: ['groups'] });
     const group = await Group.findOne({ where: { name: groupName }, relations: ['members'] });
+    // FIXME: finds invite only by group name, TOTALLY BROKEN!!!
     const invite = await Invite.findOne({ where: { group: { name: groupName } } });
 
     if (!group || !user || !invite) return false;
