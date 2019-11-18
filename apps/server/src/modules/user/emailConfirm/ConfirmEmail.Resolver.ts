@@ -13,7 +13,6 @@ export default class ConfirmEmailResolver {
     if (!confirmation) {
       return false;
     }
-    console.log(confirmation.user);
 
     if (Date.now() > confirmation.expiration) {
       return false;
