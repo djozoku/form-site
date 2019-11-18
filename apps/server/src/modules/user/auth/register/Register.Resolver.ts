@@ -1,4 +1,5 @@
 import { Resolver, Mutation, Arg } from 'type-graphql';
+import uuid from 'uuid';
 
 import EmailConfirmation from '@module/user/emailConfirm/EmailConfirm.Entity';
 import { sendConfirmationEmail } from '@module/user/emailConfirm/EmailConfirm.Utils';
@@ -6,9 +7,6 @@ import User from '@module/user/User.Entity';
 import { hashPassword } from '@module/user/auth/Auth.Utils';
 
 import RegisterInput from './Register.Input';
-
-// FIXME: FIX THIS!!!
-import uuid = require('uuid');
 
 @Resolver()
 export default class RegisterResolver {
