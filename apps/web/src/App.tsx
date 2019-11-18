@@ -3,15 +3,7 @@ import { Router } from '@reach/router';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import client from './apollo';
-import Layout from './components/Layout';
-
-const IndexPage: React.FC<{ path: string }> = () => {
-  return (
-    <Layout>
-      <div style={{ minHeight: 1000 }}>Content</div>
-    </Layout>
-  );
-};
+import IndexPage from './pages/index';
 
 const App: React.FC = () => {
   return (
