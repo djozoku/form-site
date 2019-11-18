@@ -10,11 +10,11 @@ import RegisterInput from './Register.Input';
 
 @Resolver()
 export default class RegisterResolver {
-  @Mutation(() => User)
+  @Mutation(() => Boolean)
   async register(
     @Arg('user')
     { email, firstName, lastName, username, password }: RegisterInput
-  ): Promise<User> {
+  ): Promise<boolean> {
     const hashedPassword = await hashPassword(password);
 
     const user = await User.create({
@@ -36,6 +36,6 @@ export default class RegisterResolver {
       expiration: Date.now() + 24 * 60 * 60 * 1000
     }).save();
 
-    return user;
+    return true;
   }
 }
