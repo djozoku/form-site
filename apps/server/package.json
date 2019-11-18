@@ -46,6 +46,6 @@
   },
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --no-notify --respawn src/index.ts"
   }
 }
