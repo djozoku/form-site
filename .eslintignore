@@ -5,3 +5,4 @@ node_modules
 /apps/*/dist/**/*.ts
 serviceWorker.ts
 react-app-env.d.ts
+graphql.ts
