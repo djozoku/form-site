@@ -72,7 +72,7 @@ const main = async () => {
 
   const schema = await buildSchema({
     resolvers: [...UserModule.Resolvers, ...GroupModule.Resolvers, ...FormModule.Resolvers],
-    validate: true,
+    validate: false,
     authChecker: AuthUtils.checkAuth
   });
 
