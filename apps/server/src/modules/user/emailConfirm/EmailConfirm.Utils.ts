@@ -1,7 +1,7 @@
 import MailSender from '~/utils/sendmail';
 
-export const sendConfirmationEmail = (email: string, url: string) => {
-  MailSender.send({
+export const sendConfirmationEmail = async (email: string, url: string) => {
+  return MailSender.send({
     from: 'Form Site <no-reply@form-site.io>',
     to: email,
     subject: 'Confirmation Email | Form Site',

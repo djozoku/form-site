@@ -15,11 +15,12 @@ UserValidator.init(userExists);
 
 @Resolver()
 export default class RegisterResolver {
-  @Mutation(() => Boolean)
+  @Mutation(() => String)
   async register(
     @Arg('user')
     { email, firstName, lastName, username, password }: RegisterInput
-  ): Promise<boolean> {
+  ): Promise<string> {
+    let emailUrl = '';
     try {
       await UserValidator.schema.validate({ email, username, password });
       const hashedPassword = await hashPassword(password);
@@ -35,7 +36,11 @@ export default class RegisterResolver {
 
       const id = uuid.v4();
 
-      sendConfirmationEmail(email, `http://localhost:3000/user/confirm?id=${id}`);
+      emailUrl =
+        (await sendConfirmationEmail(
+          email,
+          `http://djozokups.ddns.net:44444/account/confirm?id=${id}`
+        )) || '';
 
       await EmailConfirmation.create({
         id,
@@ -43,9 +48,9 @@ export default class RegisterResolver {
         expiration: Date.now() + 24 * 60 * 60 * 1000
       }).save();
     } catch {
-      return false;
+      return '';
     }
 
-    return true;
+    return emailUrl;
   }
 }
