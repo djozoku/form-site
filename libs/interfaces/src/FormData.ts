@@ -1,10 +1,12 @@
 export type FormFieldDatabaseType = 'text' | 'int' | 'real' | 'bool';
-export type FormFieldInputType = 'checkbox' | 'radio' | 'select' | 'text' | 'number';
+export type FormFieldInputType = 'checkbox' | 'radio' | 'select' | 'text' | 'number' | 'date';
+export type FormFieldDataType = 'date' | 'string' | 'number' | 'boolean';
 
 export interface FormField {
   name: string;
   displayName: string;
   databaseType: FormFieldDatabaseType;
+  dataType: FormFieldDataType;
   inputType: FormFieldInputType;
   options?: string[];
 }

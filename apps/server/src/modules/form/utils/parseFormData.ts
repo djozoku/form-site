@@ -5,7 +5,9 @@ export const parseFormData = (formData: string): FormData | false => {
   const data = JSON.parse(formData) as Partial<FormData>;
   if (!data?.fields || !Array.isArray(data.fields)) return false;
   for (const field of data.fields) {
-    const { name, displayName, databaseType, inputType, options } = field;
+    const { name, displayName, databaseType, dataType, inputType, options } = field;
+
+    /* name */
     if (
       !name ||
       typeof name !== 'string' ||
@@ -13,7 +15,13 @@ export const parseFormData = (formData: string): FormData | false => {
       /^[0-9]{1}.*/.test(name)
     )
       return false;
+    /* name */
+
+    /* displayName */
     if (!displayName || typeof displayName !== 'string') return false;
+    /* displayName */
+
+    /* databaseType */
     if (
       !databaseType ||
       typeof databaseType !== 'string' ||
@@ -23,6 +31,9 @@ export const parseFormData = (formData: string): FormData | false => {
         databaseType !== 'bool')
     )
       return false;
+    /* databaseType */
+
+    /* inputType */
     if (
       !inputType ||
       typeof inputType !== 'string' ||
@@ -30,11 +41,49 @@ export const parseFormData = (formData: string): FormData | false => {
         inputType !== 'radio' &&
         inputType !== 'select' &&
         inputType !== 'text' &&
+        inputType !== 'date' &&
         inputType !== 'number')
     )
       return false;
+    /* inputType */
+
+    /* dataType */
+    if (
+      !dataType ||
+      typeof dataType !== 'string' ||
+      (dataType !== 'boolean' &&
+        dataType !== 'date' &&
+        dataType !== 'number' &&
+        dataType !== 'string')
+    )
+      return false;
+    /* dataType */
+
+    /* options */
     if ((inputType === 'radio' || inputType === 'select') && (!options || !Array.isArray(options)))
       return false;
+    /* options */
+
+    /* types */
+    if (inputType === 'checkbox' && !(databaseType === 'bool' && dataType === 'boolean'))
+      return false;
+    if (
+      inputType === 'radio' &&
+      !(
+        (databaseType === 'text' && dataType === 'string') ||
+        ((databaseType === 'int' || databaseType === 'real') && dataType === 'number')
+      )
+    )
+      return false;
+    if (inputType === 'select' && !(databaseType === 'text' && dataType === 'string')) return false;
+    if (inputType === 'text' && !(databaseType === 'text' && dataType === 'string')) return false;
+    if (
+      inputType === 'number' &&
+      !((databaseType === 'int' || databaseType === 'real') && dataType === 'number')
+    )
+      return false;
+    if (inputType === 'date' && !(databaseType === 'int' && dataType === 'date')) return false;
+    /* types */
   }
   if (!data?.dataDisplay || !Array.isArray(data.dataDisplay)) return false;
   for (const dataDisplay of data.dataDisplay) {
