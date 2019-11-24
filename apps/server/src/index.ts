@@ -64,7 +64,12 @@ const main = async () => {
 
   const app = express();
 
-  app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+  app.use(
+    cors({
+      credentials: true,
+      origin: ['http://localhost:3000', 'http://djozokups.ddns.net:44444']
+    })
+  );
   app.use(cookieParser());
   app.use(i18nextMiddleware.handle(i18next));
 
