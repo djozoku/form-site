@@ -2,7 +2,7 @@ import { FormatFunction } from 'i18next';
 
 const ownFormat = (value: string, lng: string) => {
   switch (lng) {
-    case 'fi':
+    case 'fi-FI':
       switch (value) {
         case 'Salasana':
           return 'Salasanan';
@@ -18,7 +18,7 @@ const ownFormat = (value: string, lng: string) => {
 
 const inFormat = (value: string, lng: string) => {
   switch (lng) {
-    case 'fi':
+    case 'fi-FI':
       switch (value) {
         case 'Salasana':
           return 'Salasanassa';
@@ -30,7 +30,6 @@ const inFormat = (value: string, lng: string) => {
   }
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const formatFunc: FormatFunction = (value: string, format, lng) => {
   switch (format) {
     case 'own':
