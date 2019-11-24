@@ -49,10 +49,7 @@ export const checkAuth: AuthChecker<GraphQLContext> = ({ context } /* , roles */
 };
 
 export const sendRefreshToken = (res: Response, token: string) => {
-  res.cookie('xid', token, {
-    httpOnly: true,
-    path: '/refresh_token'
-  });
+  res.cookie('xid', token, { httpOnly: true });
 };
 
 export const refreshToken = (req: Request, res: Response) => {
