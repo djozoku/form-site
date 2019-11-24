@@ -1,4 +1,4 @@
-import { Query, Arg, Resolver, Args, Authorized } from 'type-graphql';
+import { Query, Arg, Resolver, Args, Authorized, Int } from 'type-graphql';
 import Group from './Group.Entity';
 import PaginationArgs from '~/utils/PaginationArgs';
 
@@ -6,7 +6,7 @@ import PaginationArgs from '~/utils/PaginationArgs';
 export default class GroupResolver {
   @Authorized()
   @Query(() => Group, { nullable: true })
-  async group(@Arg('formId') id: number) {
+  async group(@Arg('groupId', () => Int) id: number) {
     return Group.findOne(id, { relations: ['owner', 'members', 'forms'] });
   }
 

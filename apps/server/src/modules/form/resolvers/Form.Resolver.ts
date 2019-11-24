@@ -1,4 +1,4 @@
-import { Query, Arg, Resolver, Args, Authorized } from 'type-graphql';
+import { Query, Arg, Resolver, Args, Authorized, Int } from 'type-graphql';
 import Form from '../Form.Entity';
 import PaginationArgs from '~/utils/PaginationArgs';
 
@@ -6,7 +6,7 @@ import PaginationArgs from '~/utils/PaginationArgs';
 export default class FormResolver {
   @Authorized()
   @Query(() => Form, { nullable: true })
-  async form(@Arg('formId') id: number) {
+  async form(@Arg('formId', () => Int) id: number) {
     return Form.findOne(id, { relations: ['owner'] });
   }
 

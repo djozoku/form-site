@@ -13,6 +13,9 @@ export default class FormFieldData {
   databaseType: string;
 
   @Field()
+  dataType: string;
+
+  @Field()
   inputType: string;
 
   @Field(() => [String], { nullable: true })
