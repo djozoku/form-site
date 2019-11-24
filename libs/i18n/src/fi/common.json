@@ -1,5 +1,9 @@
 {
   "email": "Sähköposti",
+  "email_plural": "Sähköpostit",
   "username": "Käyttäjänimi",
-  "password": "Salasana"
+  "password": "Salasana",
+  "password_plural": "Salasanat",
+  "firstName": "Etunimi",
+  "lastName": "Sukunimi"
 }

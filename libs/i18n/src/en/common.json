@@ -1,5 +1,9 @@
 {
   "email": "Email",
+  "email_plural": "Emails",
   "username": "Username",
-  "password": "Password"
+  "password": "Password",
+  "password_plural": "Passwords",
+  "firstName": "First name",
+  "lastName": "Last name"
 }
