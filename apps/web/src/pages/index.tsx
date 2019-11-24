@@ -1,14 +1,10 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
+import Layout from '../Layout';
 
-import Layout from '../components/Layout';
-
+// TODO: actually have something here
 const IndexPage: React.FC<RouteComponentProps> = () => {
-  return (
-    <Layout>
-      <div>Content</div>
-    </Layout>
-  );
+  return <Layout>Cool</Layout>;
 };
 
 export default IndexPage;
