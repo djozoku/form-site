@@ -1,4 +1,4 @@
-import { Resolver, Arg, Query, Ctx } from 'type-graphql';
+import { Resolver, Arg, Query, Ctx, Args } from 'type-graphql';
 import { getConnection } from 'typeorm';
 
 import Group from '@module/group/Group.Entity';
@@ -6,6 +6,7 @@ import User from '@module/user/User.Entity';
 
 import { GraphQLContext } from '~/types/GraphQLContext';
 import Form from '../Form.Entity';
+import PaginationArgs from '~/utils/PaginationArgs';
 
 @Resolver()
 export default class GetFormRawDataResolver {
@@ -14,8 +15,7 @@ export default class GetFormRawDataResolver {
     @Arg('groupName') groupName: string,
     @Arg('formName') formName: string,
     @Ctx() { userId }: GraphQLContext,
-    @Arg('skip') skip: number = 0,
-    @Arg('take') take: number = 20
+    @Args() { skip, take }: PaginationArgs
   ): Promise<string | null> {
     const user = await User.findOne(userId);
     const group = await Group.findOne({
