@@ -12,20 +12,9 @@ import Grid from '@material-ui/core/Grid';
 import Link from '../../components/Link';
 import { useGroupQuery } from '../../graphql';
 
-function createData(id: number, name: string, amount?: number) {
-  return { id, name, amount };
-}
-
-const forms = [
-  createData(0, 'Form1', 312),
-  createData(1, 'Form2', 866),
-  createData(2, 'Form3', 100),
-  createData(3, 'Form4', 654),
-  createData(4, 'Form5', 212)
-];
-
 const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
   const { data, loading } = useGroupQuery({ variables: { groupId: parseInt(id!, 10) } });
+  const group = data && data.group;
   if (loading) return <div>Loading...</div>;
   return (
     <>
@@ -33,7 +22,7 @@ const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
         <Grid container spacing={3} alignContent="space-between" justify="space-between">
           <Grid item>
             <Typography component="h2" variant="h6" color="secondary" gutterBottom>
-              {data && data.group && data.group.name} Forms
+              {group && group.name} Forms
             </Typography>
           </Grid>
           <Grid item>
@@ -49,22 +38,28 @@ const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
           </Grid>
         </Grid>
       </div>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Documents</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {forms.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+      {group && group.forms && group.forms.length !== 0 && (
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {group.forms.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.displayName}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
+      {group && group.forms && group.forms.length === 0 && (
+        <Typography component="p" variant="body1" color="textPrimary" gutterBottom>
+          {/* TODO: write text about creating a new form */}
+          {group && group.name} Forms
+        </Typography>
+      )}
     </>
   );
 };
