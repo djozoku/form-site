@@ -57,7 +57,8 @@ const useStyles = makeStyles((theme) =>
   })
 );
 // TODO: responsive
-const DashboardPage: React.FC<RouteComponentProps> = ({ navigate }) => {
+const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) => {
+  const id = location!.pathname.split('/').slice(3)[0];
   const [open, setOpen] = useState(false);
   const [groupName, setGroupName] = useState('');
   const { data, loading, refetch } = useMeQuery();
@@ -147,7 +148,7 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate }) => {
         {loading && <div>Loading...</div>}
         {!loading && data && data.me && (
           <>
-            {data.me.ownedGroups && (
+            {data.me.ownedGroups!.length !== 0 && (
               <>
                 <Typography
                   component="h6"
@@ -158,13 +159,14 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate }) => {
                   My Groups:
                 </Typography>
                 <List>
-                  {data!.me.ownedGroups!.map((group: any) => (
+                  {data!.me.ownedGroups!.map((group) => (
                     <ListItem
                       button
                       key={group.id}
                       className={classes.groupListItem}
                       component={Link as any}
                       to={`/dashboard/group/${group.id}`}
+                      selected={group.id === id}
                     >
                       <ListItemText primary={group.name} />
                     </ListItem>
@@ -183,7 +185,7 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate }) => {
                   Other Groups
                 </Typography>
                 <List>
-                  {data!.me.groups!.map((group: any) => (
+                  {data!.me.groups!.map((group) => (
                     <ListItem
                       button
                       key={group.id}
@@ -199,7 +201,7 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate }) => {
             )}
           </>
         )}
-        {!loading && !data && (
+        {!loading && data!.me!.groups!.length === 0 && data!.me!.ownedGroups!.length === 0 && (
           <Typography component="h6" variant="caption" color="secondary" style={{ padding: 10 }}>
             No Groups,
             <br />
