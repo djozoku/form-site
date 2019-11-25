@@ -43,9 +43,12 @@ const NavLink: React.FC = ({ children }) => (
 );
 
 const Layout: React.FC = ({ children }) => {
-  const { data } = useMeQuery();
-  const loggedIn = data && data.me;
-  const name = loggedIn ? (data!.me as any).firstName : 'Account';
+  const { data, loading } = useMeQuery();
+  const loggedIn = !!data && !!data.me;
+  let name;
+  if (loading) name = 'Loading...';
+  else if (loggedIn) name = data!.me!.firstName;
+  else name = 'Account';
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
