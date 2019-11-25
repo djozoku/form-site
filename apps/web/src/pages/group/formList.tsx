@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { RouteComponentProps } from '@reach/router';
 import Grid from '@material-ui/core/Grid';
 import Link from '../../components/Link';
+import { useGroupQuery } from '../../graphql';
 
 function createData(id: number, name: string, amount?: number) {
   return { id, name, amount };
@@ -23,45 +24,49 @@ const forms = [
   createData(4, 'Form5', 212)
 ];
 
-const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => (
-  <>
-    <div style={{ padding: '10px 16px' }}>
-      <Grid container spacing={3} alignContent="space-between" justify="space-between">
-        <Grid item>
-          <Typography component="h2" variant="h6" color="secondary" gutterBottom>
-            Forms
-          </Typography>
+const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
+  const { data, loading } = useGroupQuery({ variables: { groupId: parseInt(id!, 10) } });
+  if (loading) return <div>Loading...</div>;
+  return (
+    <>
+      <div style={{ padding: '10px 16px' }}>
+        <Grid container spacing={3} alignContent="space-between" justify="space-between">
+          <Grid item>
+            <Typography component="h2" variant="h6" color="secondary" gutterBottom>
+              {data && data.group && data.group.name} Forms
+            </Typography>
+          </Grid>
+          <Grid item>
+            <IconButton
+              aria-label="create form"
+              size="small"
+              component={Link as any}
+              to={`/dashboard/group/${id}/form/create`}
+              style={{ position: 'relative', top: 3 }}
+            >
+              <AddIcon />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid item>
-          <IconButton
-            aria-label="create"
-            size="small"
-            component={Link as any}
-            to={`/dashboard/group/${id}/form/create`}
-            style={{ position: 'relative', top: 3 }}
-          >
-            <AddIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </div>
-    <Table size="small">
-      <TableHead>
-        <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell align="right">Documents</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {forms.map((row) => (
-          <TableRow key={row.id}>
-            <TableCell>{row.name}</TableCell>
-            <TableCell align="right">{row.amount}</TableCell>
+      </div>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell align="right">Documents</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </>
-);
+        </TableHead>
+        <TableBody>
+          {forms.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.name}</TableCell>
+              <TableCell align="right">{row.amount}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
+  );
+};
 
 export default FormList;
