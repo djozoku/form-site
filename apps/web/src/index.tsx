@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import './i18n';
 
 // TODO: move this to somewhere where we have access to router and apollo client
-const refreshToken = () => {
+/* const refreshToken = () => {
   const token = localStorage.getItem('xt');
   if (!token) return;
   console.log('Refreshing token');
@@ -19,7 +19,7 @@ const refreshToken = () => {
 };
 
 // every ms * s * m, refresh the token
-setInterval(refreshToken, 1000 * 60 * 10);
+setInterval(refreshToken, 1000 * 60 * 10); */
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
