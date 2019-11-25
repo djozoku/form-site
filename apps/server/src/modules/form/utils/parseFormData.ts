@@ -96,7 +96,8 @@ export const parseFormData = (formData: string): FormData | false => {
     )
       return false;
     if (!displayName || typeof displayName !== 'string') return false;
-    if (!display || !Array.isArray(display) || display.length < 2) return false;
+    // FIXME: should look at display to check it's data
+    if (!display || typeof display !== 'object' || Array.isArray(display)) return false;
     // FIXME: should check that display has same data as fields
   }
   return data as FormData;
