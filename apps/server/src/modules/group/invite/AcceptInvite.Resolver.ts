@@ -1,4 +1,4 @@
-import { Mutation, Arg, Ctx, Resolver } from 'type-graphql';
+import { Mutation, Arg, Ctx, Resolver, Authorized } from 'type-graphql';
 import { getManager } from 'typeorm';
 
 import User from '@module/user/User.Entity';
@@ -10,6 +10,7 @@ import Invite from './Invite.Entity';
 
 @Resolver()
 export default class AcceptInviteResolver {
+  @Authorized()
   @Mutation(() => Boolean)
   async acceptInvite(@Arg('group') groupName: string, @Ctx() { userId }: GraphQLContext) {
     const user = await User.findOne(userId, { relations: ['groups'] });

@@ -1,4 +1,4 @@
-import { Resolver, Arg, Query, Ctx } from 'type-graphql';
+import { Resolver, Arg, Query, Ctx, Authorized } from 'type-graphql';
 import { getConnection } from 'typeorm';
 
 import Group from '@module/group/Group.Entity';
@@ -11,6 +11,7 @@ import { parseDataDisplay } from '../utils/parseDataDisplay';
 // TODO: complete this
 @Resolver()
 export default class GetFormDataResolver {
+  @Authorized()
   @Query(() => String, { nullable: true })
   async getFormData(
     @Arg('groupName') groupName: string,

@@ -1,4 +1,4 @@
-import { Resolver, Arg, Query, Ctx, Args } from 'type-graphql';
+import { Resolver, Arg, Query, Ctx, Args, Authorized } from 'type-graphql';
 import { getConnection } from 'typeorm';
 
 import Group from '@module/group/Group.Entity';
@@ -10,6 +10,7 @@ import PaginationArgs from '~/utils/PaginationArgs';
 
 @Resolver()
 export default class GetFormRawDataResolver {
+  @Authorized()
   @Query(() => String, { nullable: true })
   async getFormRawData(
     @Arg('groupName') groupName: string,

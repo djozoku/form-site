@@ -1,4 +1,4 @@
-import { Resolver, Arg, Mutation, Ctx } from 'type-graphql';
+import { Resolver, Arg, Mutation, Ctx, Authorized } from 'type-graphql';
 
 import Group from '@module/group/Group.Entity';
 import User from '@module/user/User.Entity';
@@ -9,6 +9,7 @@ import { addFormDocument } from '../utils/addFormDocument';
 
 @Resolver()
 export default class AddFormDocumentResolver {
+  @Authorized()
   @Mutation(() => Boolean)
   async addFormDocument(
     @Arg('groupName') groupName: string,

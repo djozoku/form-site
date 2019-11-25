@@ -1,4 +1,4 @@
-import { Resolver, Arg, Ctx, Query } from 'type-graphql';
+import { Resolver, Arg, Ctx, Query, Authorized } from 'type-graphql';
 
 import Group from '@module/group/Group.Entity';
 import User from '@module/user/User.Entity';
@@ -9,6 +9,7 @@ import FormFieldData from './FormFieldData.Type';
 
 @Resolver()
 export default class GetFormFieldInputDataResolver {
+  @Authorized()
   @Query(() => [FormFieldData], { nullable: true })
   async getFormFieldInputData(
     @Arg('groupName') groupName: string,

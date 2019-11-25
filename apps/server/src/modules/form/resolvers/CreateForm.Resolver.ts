@@ -1,4 +1,4 @@
-import { Resolver, Arg, Mutation, Ctx } from 'type-graphql';
+import { Resolver, Arg, Mutation, Ctx, Authorized } from 'type-graphql';
 
 import Group from '@module/group/Group.Entity';
 import User from '@module/user/User.Entity';
@@ -10,6 +10,7 @@ import { parseFormData } from '../utils/parseFormData';
 
 @Resolver()
 export default class CreateFormResolver {
+  @Authorized()
   @Mutation(() => Boolean)
   async createForm(
     @Arg('groupName') groupName: string,
