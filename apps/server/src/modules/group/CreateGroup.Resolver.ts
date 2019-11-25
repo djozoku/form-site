@@ -1,4 +1,4 @@
-import { Authorized, Mutation, Resolver, Arg, Ctx } from 'type-graphql';
+import { Authorized, Mutation, Resolver, Arg, Ctx, Int } from 'type-graphql';
 import { getManager } from 'typeorm';
 
 import User from '@module/user/User.Entity';
@@ -10,16 +10,18 @@ import Group from './Group.Entity';
 @Resolver()
 export default class CreateGroupResolver {
   @Authorized()
-  @Mutation(() => Boolean, { nullable: true })
+  @Mutation(() => Int)
   async createGroup(@Arg('name') name: string, @Ctx() { userId }: GraphQLContext) {
-    const user = await User.findOne(userId);
+    const user = (await User.findOne(userId, { relations: ['ownedGroups'] })) as User;
     if (await Group.findOne({ where: { name } })) {
-      return false;
+      return 0;
     }
     const group = new Group();
     group.name = name;
-    group.owner = user!;
-    await getManager().save(group);
-    return true;
+    group.owner = user;
+    const id = (await getManager().save(group)).id;
+    user.ownedGroups!.push(group);
+    await getManager().save(user);
+    return id;
   }
 }
