@@ -6,7 +6,8 @@ import {
   BaseEntity,
   ManyToMany,
   JoinTable,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 
@@ -42,7 +43,7 @@ export default class Group extends BaseEntity implements IGroup {
   members?: User[];
 
   @Field(() => [Form], { nullable: true })
-  @ManyToOne(
+  @OneToMany(
     () => Form,
     (form) => form.owner
   )

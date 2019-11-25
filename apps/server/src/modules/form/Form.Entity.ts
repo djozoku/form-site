@@ -1,6 +1,6 @@
 /* eslint-disable react/static-property-placement */
 /* eslint-disable import/no-cycle */
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 
 import { Form as IForm } from '@form/interfaces/types/Form';
@@ -24,7 +24,7 @@ export default class Form extends BaseEntity implements IForm {
   displayName: string;
 
   @Field(() => Group, { nullable: true })
-  @OneToMany(
+  @ManyToOne(
     () => Group,
     (group) => group.forms
   )
