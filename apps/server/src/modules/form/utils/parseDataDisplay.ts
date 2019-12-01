@@ -1,9 +1,8 @@
 /* eslint-disable no-plusplus */
-import { DeepPartial } from 'ts-essentials';
 import { Condition, FormDisplays } from '@form/interfaces/types/FormData';
 
 const parseCondition = (display: Condition) => {
-  switch (display.conditionType) {
+  switch (display.type) {
     case '!=':
       return 'not';
     case '=':
@@ -17,22 +16,21 @@ const parseCondition = (display: Condition) => {
   }
 };
 
-export const parseDataDisplay = (
-  display: FormDisplays | DeepPartial<FormDisplays>
-): FormDisplays | false => {
+export const parseDataDisplay = (display: FormDisplays): FormDisplays | false => {
   if (!display.type || (display.type !== 'calculation' && display.type !== 'count')) return false;
   if (display.type === 'calculation') {
     const { left, operation, right } = display;
     if (
       !left ||
       !left.type ||
-      left.type === 'calculation' ||
-      left.type !== 'count' ||
+      !(left.type === 'calculation' || left.type === 'count') ||
       !operation ||
-      !right
+      !right ||
+      !right.type ||
+      !(right.type === 'calculation' || right.type === 'count')
     )
       return false;
-    if (!parseCondition(left.conditions![0] as Condition)) return false;
+    if (left.type === 'count' && !parseCondition(left.conditions![0])) return false;
   }
   return false;
 };
