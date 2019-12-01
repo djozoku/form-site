@@ -53,6 +53,21 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.up('md')]: {
         paddingLeft: 200
       }
+    },
+    paper: {
+      maxWidth: 150,
+      [theme.breakpoints.up('sm')]: {
+        maxWidth: 200
+      },
+      [theme.breakpoints.up('md')]: {
+        maxWidth: 250
+      },
+      [theme.breakpoints.up('lg')]: {
+        maxWidth: 300
+      },
+      [theme.breakpoints.up('xl')]: {
+        maxWidth: 400
+    }
     }
   })
 );
@@ -61,6 +76,7 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
   const id = location!.pathname.split('/').slice(3)[0];
   const [open, setOpen] = useState(false);
   const [groupName, setGroupName] = useState('');
+  const [error, setError] = useState('');
   const { data, loading, refetch } = useMeQuery();
   const [createGroup, createGroupData] = useCreateGroupMutation();
   const classes = useStyles();
@@ -79,10 +95,14 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
   };
 
   const handleCreateGroupChange = (e: any) => {
+    if (e.currentTarget.value.length > 100)
+      setError('Group name must not be longer than 100 characters.');
+    else setError('');
     setGroupName(e.currentTarget.value);
   };
 
   const handleCreateGroupDialogCreateButtonClick = () => {
+    if (error) return;
     createGroup({ variables: { name: groupName } }).then((d) => {
       handleCreateGroupDialogClose();
       navigate!(`/dashboard/group/${d.data!.createGroup}`);
@@ -92,7 +112,7 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
 
   return (
     <Layout>
-      <Drawer variant="permanent">
+      <Drawer classes={{ paper: classes.paper }} variant="permanent">
         <Toolbar />
         <Divider />
         <div className={classes.groupListTitle}>
