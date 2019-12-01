@@ -58,18 +58,10 @@ const LoginPage: React.FC<RouteComponentProps> = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login to Form Site
           </Typography>
           <Formik
             initialValues={{ username: '', password: '' }}
-            onSubmit={async ({ username, password }) => {
-              console.log('Logging in...');
-              const logindata = await login({ variables: { username, password } });
-              const token =
-                logindata.data && logindata.data.login ? logindata.data.login.accessToken : '';
-              localStorage.setItem('xt', token);
-              navigate('/dashboard');
-            }}
             validate={(values) => {
               const errors: Record<string, string> = {};
               if (values.username === '')
@@ -78,32 +70,40 @@ const LoginPage: React.FC<RouteComponentProps> = () => {
                 errors.password = t('validation:required', { field: t('common:password') });
               return errors;
             }}
+            onSubmit={async ({ username, password }) => {
+              console.log('Logging in...');
+              const logindata = await login({ variables: { username, password } });
+              const token =
+                logindata.data && logindata.data.login ? logindata.data.login.accessToken : '';
+              localStorage.setItem('xt', token);
+              navigate('/dashboard');
+            }}
           >
             {() => (
               <Form>
                 <FormTextField label="Username" name="username" />
                 <FormTextField label="Password" name="password" type="password" />
                 <FormControlLabel
-                  control={<Checkbox value="remember" color="secondary" />}
+                  control={<Checkbox color="secondary" value="remember" />}
                   label="Remember me"
                 />
                 <Button
-                  type="submit"
                   fullWidth
-                  variant="contained"
-                  color="secondary"
                   className={classes.submit}
+                  color="secondary"
                   disabled={loading}
+                  type="submit"
+                  variant="contained"
                 >
                   Login
                 </Button>
                 <Grid container justify="center">
                   <Grid item>
                     <MUILink
-                      variant="body2"
                       color="secondary"
-                      to="/account/register"
                       component={Link}
+                      to="/account/register"
+                      variant="body2"
                     >
                       Don&apos;t have an account? Register
                     </MUILink>

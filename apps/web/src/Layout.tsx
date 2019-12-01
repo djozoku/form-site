@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) =>
 
 const Copyright = () => {
   return (
-    <Typography variant="body2" color="textPrimary" align="center">
+    <Typography align="center" color="textPrimary" variant="body2">
       Copyright ©
       <MUILink color="inherit" href="https://github.com/djozoku/form-site/">
         Form Site
@@ -37,7 +37,7 @@ const Copyright = () => {
 };
 
 const NavLink: React.FC = ({ children }) => (
-  <Typography variant="caption" style={{ textTransform: 'none', fontSize: 14 }}>
+  <Typography style={{ textTransform: 'none', fontSize: 14 }} variant="caption">
     {children}
   </Typography>
 );
@@ -68,24 +68,24 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <>
-      <AppBar position="sticky" color="secondary" elevation={0} className={classes.appBar}>
+      <AppBar className={classes.appBar} color="secondary" elevation={0} position="sticky">
         <Toolbar>
           <Button
-            size="large"
             color="primary"
+            component={Link as any}
+            size="large"
             startIcon={<HomeIcon />}
             to="/"
-            component={Link as any}
           >
             <NavLink>Home</NavLink>
           </Button>
           {loggedIn && (
             <Button
-              size="large"
               color="primary"
+              component={Link as any}
+              size="large"
               startIcon={<ViewCompactIcon />}
               to="/dashboard"
-              component={Link as any}
             >
               <NavLink>Dashboard</NavLink>
             </Button>
@@ -93,18 +93,18 @@ const Layout: React.FC = ({ children }) => {
           <Button
             aria-controls="simple-menu"
             aria-haspopup="true"
-            size="large"
             color="primary"
             endIcon={<AccountCircleIcon />}
+            size="large"
             style={{ position: 'absolute', right: 20 }}
             onClick={handleAccountClick}
           >
             <NavLink>{name}</NavLink>
           </Button>
           <Menu
-            id="account-menu"
-            anchorEl={anchorEl}
             keepMounted
+            anchorEl={anchorEl}
+            id="account-menu"
             open={!!anchorEl}
             onClose={handleMenuClose}
           >
@@ -116,10 +116,10 @@ const Layout: React.FC = ({ children }) => {
           </Menu>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="xl" component="main" style={{ marginTop: 20 }}>
+      <Container component="main" maxWidth="xl" style={{ marginTop: 20 }}>
         {children}
       </Container>
-      <Container maxWidth="xl" component="footer" style={{ position: 'absolute', bottom: 0 }}>
+      <Container component="footer" maxWidth="xl" style={{ position: 'absolute', bottom: 0 }}>
         <Box m={5}>
           <Copyright />
         </Box>

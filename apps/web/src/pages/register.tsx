@@ -84,16 +84,6 @@ const RegisterPage: React.FC<RouteComponentProps> = () => {
               confirmEmail: '',
               confirmPassword: ''
             }}
-            onSubmit={(val) => {
-              const { email, firstName, lastName, username, password } = val;
-              console.log('Registering');
-              register({ variables: { email, firstName, lastName, username, password } }).then(
-                (v) => {
-                  console.log(v && v.data && v.data.register);
-                  navigate('/account/login');
-                }
-              );
-            }}
             validate={(values) => {
               const errors: Record<string, string> = {};
               if (values.firstName === '')
@@ -115,49 +105,59 @@ const RegisterPage: React.FC<RouteComponentProps> = () => {
               return errors;
             }}
             validationSchema={UserValidator.schema}
+            onSubmit={(val) => {
+              const { email, firstName, lastName, username, password } = val;
+              console.log('Registering');
+              register({ variables: { email, firstName, lastName, username, password } }).then(
+                (v) => {
+                  console.log(v && v.data && v.data.register);
+                  navigate('/account/login');
+                }
+              );
+            }}
           >
             {() => (
               <Form>
                 <Grid container spacing={1}>
-                  <Grid item xs={12} sm={6}>
-                    <FormTextField name="firstName" label="First Name" />
+                  <Grid item sm={6} xs={12}>
+                    <FormTextField label="First Name" name="firstName" />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormTextField name="lastName" label="Last Name" />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormTextField name="username" label="Username" />
+                  <Grid item sm={6} xs={12}>
+                    <FormTextField label="Last Name" name="lastName" />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormTextField name="email" label="Email" />
+                    <FormTextField label="Username" name="username" />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormTextField name="confirmEmail" label="Confirm Email" />
+                    <FormTextField label="Email" name="email" />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormTextField name="password" label="Password" type="password" />
+                    <FormTextField label="Confirm Email" name="confirmEmail" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormTextField label="Password" name="password" type="password" />
                   </Grid>
                   <Grid item xs={12}>
                     <FormTextField
-                      name="confirmPassword"
                       label="Confirm Password"
+                      name="confirmPassword"
                       type="password"
                     />
                   </Grid>
                 </Grid>
                 <Button
-                  type="submit"
                   fullWidth
-                  variant="contained"
-                  color="secondary"
                   className={classes.submit}
+                  color="secondary"
                   disabled={loading}
+                  type="submit"
+                  variant="contained"
                 >
                   Register
                 </Button>
                 <Grid container justify="center">
                   <Grid item>
-                    <MUILink variant="body2" color="secondary" to="/account/login" component={Link}>
+                    <MUILink color="secondary" component={Link} to="/account/login" variant="body2">
                       Already have an account? Login
                     </MUILink>
                   </Grid>

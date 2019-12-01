@@ -35,7 +35,7 @@ const LogoutPage: React.FC<RouteComponentProps> = () => {
     <Layout>
       <Container maxWidth="md">
         <Paper style={{ padding: 20, textAlign: 'center' }}>
-          <Typography component="h2" variant="h4" color={color}>
+          <Typography color={color} component="h2" variant="h4">
             {text}
           </Typography>
           {(error || (data && !data.logout)) && (

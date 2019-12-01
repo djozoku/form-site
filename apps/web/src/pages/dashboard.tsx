@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
@@ -19,12 +19,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Link from '../components/Link';
 import Layout from '../Layout';
 import { useMeQuery, useCreateGroupMutation } from '../graphql';
 import DashboardIndex from './dashboard/info';
-import CreateGroupPage from './group/createGroup';
 import FormListPage from './group/formList';
 import CreateFormPage from './form/createForm';
 import FormDataPage from './form/formData';
@@ -43,6 +43,16 @@ const useStyles = makeStyles((theme) =>
         paddingRight: 20
       }
     },
+    groupListHeader: {
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingLeft: 10,
+      paddingRight: 10,
+      [theme.breakpoints.up('sm')]: {
+        paddingLeft: 20,
+        paddingRight: 20
+      }
+    },
     groupListItem: {
       [theme.breakpoints.up('md')]: {
         paddingLeft: 26,
@@ -51,7 +61,7 @@ const useStyles = makeStyles((theme) =>
     },
     formListContainer: {
       [theme.breakpoints.up('md')]: {
-        paddingLeft: 200
+        paddingLeft: 250
       }
     },
     paper: {
@@ -67,12 +77,14 @@ const useStyles = makeStyles((theme) =>
       },
       [theme.breakpoints.up('xl')]: {
         maxWidth: 400
-    }
+      }
     }
   })
 );
 // TODO: responsive
 const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const id = location!.pathname.split('/').slice(3)[0];
   const [open, setOpen] = useState(false);
   const [groupName, setGroupName] = useState('');
@@ -115,55 +127,61 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
       <Drawer classes={{ paper: classes.paper }} variant="permanent">
         <Toolbar />
         <Divider />
-        <div className={classes.groupListTitle}>
-          Groups
-          <IconButton
-            aria-label="create group"
-            size="small"
-            color="secondary"
-            style={{ position: 'relative', left: 10, top: -1 }}
-            onClick={handleCreateGroupButtonClick}
-          >
-            <AddIcon />
-          </IconButton>
+        <Grid container alignItems="center" className={classes.groupListHeader} justify="center">
+          <Grid item>
+            <div className={classes.groupListTitle}>Groups</div>
+          </Grid>
+          <Grid item>
+            <Button
+              color="secondary"
+              size={matches ? 'small' : 'medium'}
+              startIcon={<AddIcon />}
+              variant="contained"
+              onClick={handleCreateGroupButtonClick}
+            >
+              Create Group
+            </Button>
+          </Grid>
           <Dialog
-            open={open}
-            onClose={handleCreateGroupDialogClose}
+            fullWidth
             aria-labelledby="create-group-dialog-title"
             maxWidth="xs"
-            fullWidth
+            open={open}
+            onClose={handleCreateGroupDialogClose}
           >
             <DialogTitle id="create-group-dialog-title">Create Group</DialogTitle>
             <DialogContent>
               <TextField
                 autoFocus
-                margin="dense"
-                id="name"
-                label="Group Name"
                 fullWidth
                 color="secondary"
-                onChange={handleCreateGroupChange}
+                error={!!error}
+                helperText={error}
+                id="name"
+                label="Group Name"
+                margin="dense"
                 value={groupName}
+                onChange={handleCreateGroupChange}
               />
             </DialogContent>
             <DialogActions>
               <Button
-                onClick={handleCreateGroupDialogClose}
                 color="secondary"
                 disabled={createGroupData.loading}
+                onClick={handleCreateGroupDialogClose}
               >
                 Cancel
               </Button>
               <Button
-                onClick={handleCreateGroupDialogCreateButtonClick}
                 color="secondary"
                 disabled={createGroupData.loading}
+                onClick={handleCreateGroupDialogCreateButtonClick}
               >
                 Create
               </Button>
             </DialogActions>
           </Dialog>
-        </div>
+        </Grid>
         <Divider />
         {loading && <div>Loading...</div>}
         {!loading && data && data.me && (
@@ -171,22 +189,22 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
             {data.me.ownedGroups!.length !== 0 && (
               <>
                 <Typography
-                  component="h6"
-                  variant="caption"
                   color="secondary"
+                  component="h6"
                   style={{ paddingLeft: 0, paddingTop: 10, fontSize: 14, textAlign: 'center' }}
+                  variant="caption"
                 >
                   My Groups:
                 </Typography>
                 <List>
                   {data!.me.ownedGroups!.map((group) => (
                     <ListItem
-                      button
                       key={group.id}
+                      button
                       className={classes.groupListItem}
                       component={Link as any}
-                      to={`/dashboard/group/${group.id}`}
                       selected={group.id === id}
+                      to={`/dashboard/group/${group.id}`}
                     >
                       <ListItemText primary={group.name} />
                     </ListItem>
@@ -197,18 +215,18 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
             {data.me.groups!.length !== 0 && (
               <>
                 <Typography
-                  component="h6"
-                  variant="caption"
                   color="secondary"
+                  component="h6"
                   style={{ paddingLeft: 5 }}
+                  variant="caption"
                 >
                   Other Groups
                 </Typography>
                 <List>
-                  {data!.me.groups!.map((group) => (
+                  {data.me.groups!.map((group) => (
                     <ListItem
-                      button
                       key={group.id}
+                      button
                       className={classes.groupListItem}
                       component={Link as any}
                       to={`/dashboard/group/${group.id}`}
@@ -222,15 +240,14 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
           </>
         )}
         {!loading && data!.me!.groups!.length === 0 && data!.me!.ownedGroups!.length === 0 && (
-          <Typography component="h6" variant="caption" color="secondary" style={{ padding: 10 }}>
-            No Groups,
-            <br />
+          <Typography color="secondary" component="h6" style={{ padding: 10 }} variant="caption">
+            No Groups, <br />
             Add a group by <br />
-            clicking the + symbol above
+            pressing the + button above
           </Typography>
         )}
       </Drawer>
-      <Container maxWidth="lg" className={classes.formListContainer}>
+      <Container className={classes.formListContainer} maxWidth="xl">
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper>

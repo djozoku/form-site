@@ -19,19 +19,19 @@ const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
   return (
     <>
       <div style={{ padding: '10px 16px' }}>
-        <Grid container spacing={3} alignContent="space-between" justify="space-between">
+        <Grid container alignContent="space-between" justify="space-between" spacing={3}>
           <Grid item>
-            <Typography component="h2" variant="h6" color="secondary" gutterBottom>
+            <Typography gutterBottom color="secondary" component="h2" variant="h6">
               {group && group.name} Forms
             </Typography>
           </Grid>
           <Grid item>
             <IconButton
               aria-label="create form"
-              size="small"
               component={Link as any}
-              to={`/dashboard/group/${id}/form/create`}
+              size="small"
               style={{ position: 'relative', top: 3 }}
+              to={`/dashboard/group/${id}/form/create`}
             >
               <AddIcon />
             </IconButton>
@@ -39,7 +39,7 @@ const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
         </Grid>
       </div>
       {group && group.forms && group.forms.length !== 0 && (
-        <Table size="small">
+        <Table size="medium">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -47,7 +47,7 @@ const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
           </TableHead>
           <TableBody>
             {group.forms.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} hover style={{ cursor: 'pointer' }}>
                 <TableCell>{row.displayName}</TableCell>
               </TableRow>
             ))}
@@ -55,9 +55,14 @@ const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
         </Table>
       )}
       {group && group.forms && group.forms.length === 0 && (
-        <Typography component="p" variant="body1" color="textPrimary" gutterBottom>
-          {/* TODO: write text about creating a new form */}
-          {group && group.name} Forms
+        <Typography
+          gutterBottom
+          color="textPrimary"
+          component="p"
+          style={{ padding: '10px 16px' }}
+          variant="body1"
+        >
+          No forms, You can create a new form by pressing the + button above
         </Typography>
       )}
     </>
