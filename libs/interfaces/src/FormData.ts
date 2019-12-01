@@ -27,7 +27,7 @@ export type BooleanConditionTypes = '&' | '|';
 export type ValueConditionTypes = '=' | '<' | '>' | '<=' | '>=' | '!=';
 
 export interface BaseCondition<T> {
-  conditionType: T;
+  type: T;
 }
 
 export type BooleanCondition = BaseCondition<BooleanConditionTypes>;
@@ -40,7 +40,7 @@ export interface ValueCondition extends BaseCondition<ValueConditionTypes> {
 export type Condition = ValueCondition | BooleanCondition;
 
 export interface CountDisplay extends FormDisplay<'count'> {
-  conditions: Condition & ValueCondition[];
+  conditions: Condition[];
 }
 
 export type FormDisplays = CalculationDisplay<FormDisplays, FormDisplays> | CountDisplay;
