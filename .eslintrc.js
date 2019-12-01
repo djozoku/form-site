@@ -32,6 +32,13 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
+    "react/jsx-sort-props": [1, {
+      "callbacksLast": true,
+      "shorthandFirst": true,
+      "ignoreCase": true,
+      "reservedFirst": true
+    }],
+    "react/jsx-key": [1, {checkFragmentShorthand: true}],
     'react/button-has-type': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
