@@ -238,7 +238,6 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
               {!loading && (
                 <Router>
                   <DashboardIndex path="/" />
-                  <CreateGroupPage path="group/create" />
                   <FormListPage path="group/:id" />
                   <CreateFormPage path="group/:id/form/create" />
                   <FormDataPage path="group/:gid/form/:fid" />
