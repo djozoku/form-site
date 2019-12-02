@@ -10,7 +10,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -62,6 +61,12 @@ const useStyles = makeStyles((theme) =>
     formListContainer: {
       [theme.breakpoints.up('md')]: {
         paddingLeft: 250
+      },
+      [theme.breakpoints.up('lg')]: {
+        paddingLeft: 300
+      },
+      [theme.breakpoints.up('xl')]: {
+        paddingLeft: 400
       }
     },
     paper: {
@@ -81,7 +86,7 @@ const useStyles = makeStyles((theme) =>
     }
   })
 );
-// TODO: responsive
+// TODO: mobile friendly (sliding drawer)
 const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -203,7 +208,7 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
                       button
                       className={classes.groupListItem}
                       component={Link as any}
-                      selected={group.id === id}
+                      selected={group.id === parseInt(id, 10)}
                       to={`/dashboard/group/${group.id}`}
                     >
                       <ListItemText primary={group.name} />
