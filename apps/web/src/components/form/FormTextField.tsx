@@ -4,22 +4,39 @@ import { useField, FieldAttributes } from 'formik';
 
 type FormTextFieldProps = {
   label: string;
+  additionalChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 } & FieldAttributes<string>;
 
-const FormTextField: React.FC<FormTextFieldProps> = ({ label, type, ...props }) => {
+const FormTextField: React.FC<FormTextFieldProps> = ({
+  label,
+  type,
+  disabled,
+  additionalChangeHandler,
+  autoFocus,
+  ...props
+}) => {
   const [field, meta] = useField<string>(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (additionalChangeHandler) additionalChangeHandler(e);
+    field.onChange(e);
+  };
   return (
     <TextField
-      {...field}
-      variant="outlined"
+      fullWidth
+      autoFocus={autoFocus}
+      color="secondary"
+      disabled={disabled}
+      error={!!errorText}
+      helperText={errorText}
       label={label}
       margin="normal"
-      helperText={errorText}
-      error={!!errorText}
-      fullWidth
+      name={field.name}
       type={type}
-      color="secondary"
+      value={field.value}
+      variant="outlined"
+      onBlur={field.onBlur}
+      onChange={handleChange}
     />
   );
 };
