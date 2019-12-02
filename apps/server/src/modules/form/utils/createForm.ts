@@ -10,7 +10,7 @@ export const createForm = async (
   group: Group,
   formName: string,
   formData: FormData
-): Promise<boolean> => {
+): Promise<Form> => {
   const form = Form.create({
     name: formName,
     displayName: formData.displayName || formName,
@@ -20,6 +20,5 @@ export const createForm = async (
   });
   const columns = formData.fields!.map((f) => `, ${f.name} ${f.databaseType}`).join('');
   await getConnection().query(`CREATE TABLE ${formName}_Form (ID SERIAL PRIMARY KEY ${columns});`);
-  await getManager().save(form);
-  return true;
+  return getManager().save(form);
 };

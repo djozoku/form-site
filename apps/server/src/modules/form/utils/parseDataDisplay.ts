@@ -1,22 +1,33 @@
 /* eslint-disable no-plusplus */
 import { Condition, FormDisplays } from '@form/interfaces/types/FormData';
 
-const parseCondition = (display: Condition) => {
+export const parseCondition = (display: Condition, bool: boolean) => {
+  if (bool) {
+    switch (display.type) {
+      case '&':
+        return 'and';
+      case '|':
+        return 'or';
+      default:
+        return '';
+    }
+  }
   switch (display.type) {
-    case '!=':
-      return 'not';
     case '=':
-      return 'equals';
-    case '&':
-      return 'and';
-    case '|':
-      return 'or';
+    case '!=':
+    case '>':
+    case '<':
+    case '<=':
+    case '>=':
+      break;
     default:
       return '';
   }
+  if (display.fieldName === '' || display.data === '') return '';
+  return display.type;
 };
 
-export const parseDataDisplay = (display: FormDisplays): FormDisplays | false => {
+export const parseDataDisplay = async (display: FormDisplays): Promise<boolean> => {
   if (!display.type || (display.type !== 'calculation' && display.type !== 'count')) return false;
   if (display.type === 'calculation') {
     const { left, operation, right } = display;
@@ -30,7 +41,17 @@ export const parseDataDisplay = (display: FormDisplays): FormDisplays | false =>
       !(right.type === 'calculation' || right.type === 'count')
     )
       return false;
-    if (left.type === 'count' && !parseCondition(left.conditions![0])) return false;
+    return parseDataDisplay(left) && parseDataDisplay(right);
   }
-  return false;
+  if (
+    display.type === 'count' &&
+    !display.conditions.reduce<boolean>((acc, condition, i) => {
+      if (i === 0) {
+        return !!parseCondition(condition, false);
+      }
+      return acc && !!parseCondition(condition, i % 2 !== 0);
+    }, false)
+  )
+    return false;
+  return true;
 };
