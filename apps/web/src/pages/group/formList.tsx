@@ -12,10 +12,13 @@ import Grid from '@material-ui/core/Grid';
 import Link from '../../components/Link';
 import { useGroupQuery } from '../../graphql';
 
-const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
+const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id, navigate }) => {
   const { data, loading } = useGroupQuery({ variables: { groupId: parseInt(id!, 10) } });
   const group = data && data.group;
   if (loading) return <div>Loading...</div>;
+  const handleFormClick = (formId: number) => () => {
+    navigate!(`/dashboard/group/${id}/form/${formId}`);
+  };
   return (
     <>
       <div style={{ padding: '10px 16px' }}>
@@ -47,7 +50,12 @@ const FormList: React.FC<RouteComponentProps<{ id: string }>> = ({ id }) => {
           </TableHead>
           <TableBody>
             {group.forms.map((row) => (
-              <TableRow key={row.id} hover style={{ cursor: 'pointer' }}>
+              <TableRow
+                key={row.id}
+                hover
+                style={{ cursor: 'pointer' }}
+                onClick={handleFormClick(row.id)}
+              >
                 <TableCell>{row.displayName}</TableCell>
               </TableRow>
             ))}
