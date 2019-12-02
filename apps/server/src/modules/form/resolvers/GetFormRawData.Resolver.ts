@@ -1,4 +1,4 @@
-import { Resolver, Arg, Query, Ctx, Args, Authorized } from 'type-graphql';
+import { Resolver, Arg, Query, Ctx, Args, Authorized, Int } from 'type-graphql';
 import { getConnection } from 'typeorm';
 
 import Group from '@module/group/Group.Entity';
@@ -13,17 +13,17 @@ export default class GetFormRawDataResolver {
   @Authorized()
   @Query(() => String, { nullable: true })
   async getFormRawData(
-    @Arg('groupName') groupName: string,
-    @Arg('formName') formName: string,
+    @Arg('gid', () => Int) groupId: number,
+    @Arg('fid', () => Int) formId: number,
     @Ctx() { userId }: GraphQLContext,
     @Args() { skip, take }: PaginationArgs
   ): Promise<string | null> {
     const user = await User.findOne(userId);
     const group = await Group.findOne({
-      where: { name: groupName },
+      where: { id: groupId },
       relations: ['members', 'owner', 'forms']
     });
-    const form = await Form.findOne({ where: { name: formName } });
+    const form = await Form.findOne({ where: { id: formId } });
 
     if (
       !user ||
@@ -34,7 +34,7 @@ export default class GetFormRawDataResolver {
     ) {
       return null;
     }
-    const query = `SELECT * FROM ${formName}_Form WHERE ID > ${skip} AND ID <= ${skip + take};`;
+    const query = `SELECT * FROM ${form.name}_Form WHERE ID > ${skip} AND ID <= ${skip + take};`;
     const result = await getConnection().query(query);
     if (!result) return null;
     return JSON.stringify(result.rows);

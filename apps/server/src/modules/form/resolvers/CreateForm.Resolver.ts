@@ -1,4 +1,4 @@
-import { Resolver, Arg, Mutation, Ctx, Authorized } from 'type-graphql';
+import { Resolver, Arg, Mutation, Ctx, Authorized, Int } from 'type-graphql';
 
 import Group from '@module/group/Group.Entity';
 import User from '@module/user/User.Entity';
@@ -11,14 +11,14 @@ import { parseFormData } from '../utils/parseFormData';
 @Resolver()
 export default class CreateFormResolver {
   @Authorized()
-  @Mutation(() => Boolean)
+  @Mutation(() => Int)
   async createForm(
     @Arg('groupName') groupName: string,
     @Arg('formName') formName: string,
     // FIXME: use a real typescript type
     @Arg('formData') formData: string,
     @Ctx() { userId }: GraphQLContext
-  ): Promise<boolean> {
+  ): Promise<number> {
     const user = await User.findOne(userId);
     const group = await Group.findOne({ where: { name: groupName }, relations: ['owner'] });
 
@@ -28,13 +28,13 @@ export default class CreateFormResolver {
       group.owner!.id !== user.id ||
       (await Form.findOne({ where: { name: formName } }))
     ) {
-      return false;
+      return 0;
     }
 
     const parsedData = await parseFormData(formData);
 
-    if (!parsedData) return false;
+    if (!parsedData) return 0;
 
-    return createForm(group, formName, parsedData);
+    return (await createForm(group, formName, parsedData)).id;
   }
 }

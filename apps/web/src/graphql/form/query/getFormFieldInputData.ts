@@ -1,8 +1,8 @@
 import { gql } from 'apollo-boost';
 
 export const GetFormFieldInputData = gql`
-  query GetFormFieldInputData($groupName: String!, $formName: String!) {
-    getFormFieldInputData(groupName: $groupName, formName: $formName) {
+  query GetFormFieldInputData($gid: Int!, $fid: Int!) {
+    getFormFieldInputData(gid: $gid, fid: $fid) {
       name
       displayName
       databaseType

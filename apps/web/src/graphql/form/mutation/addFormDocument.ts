@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const AddFormDocument = gql`
-  mutation AddFormDocument($groupName: String!, $formName: String!, $document: String!) {
-    addFormDocument(groupName: $groupName, formName: $formName, document: $document)
+  mutation AddFormDocument($gid: Int!, $fid: Int!, $document: String!) {
+    addFormDocument(gid: $gid, fid: $fid, document: $document)
   }
 `;

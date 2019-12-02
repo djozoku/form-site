@@ -1,4 +1,4 @@
-import { Resolver, Arg, Ctx, Query, Authorized } from 'type-graphql';
+import { Resolver, Arg, Ctx, Query, Authorized, Int } from 'type-graphql';
 
 import Group from '@module/group/Group.Entity';
 import User from '@module/user/User.Entity';
@@ -12,16 +12,16 @@ export default class GetFormFieldInputDataResolver {
   @Authorized()
   @Query(() => [FormFieldData], { nullable: true })
   async getFormFieldInputData(
-    @Arg('groupName') groupName: string,
-    @Arg('formName') formName: string,
+    @Arg('gid', () => Int) groupId: number,
+    @Arg('fid', () => Int) formId: number,
     @Ctx() { userId }: GraphQLContext
   ): Promise<FormFieldData[] | null> {
     const user = await User.findOne(userId);
     const group = await Group.findOne({
-      where: { name: groupName },
+      where: { id: groupId },
       relations: ['members', 'owner', 'forms']
     });
-    const form = await Form.findOne({ where: { name: formName } });
+    const form = await Form.findOne({ where: { id: formId } });
 
     if (
       !user ||

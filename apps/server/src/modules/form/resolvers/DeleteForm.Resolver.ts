@@ -1,4 +1,4 @@
-import { Resolver, Arg, Mutation, Ctx, Authorized } from 'type-graphql';
+import { Resolver, Arg, Mutation, Ctx, Authorized, Int } from 'type-graphql';
 
 import Group from '@module/group/Group.Entity';
 import User from '@module/user/User.Entity';
@@ -12,16 +12,16 @@ export default class DeleteFormResolver {
   @Authorized()
   @Mutation(() => Boolean)
   async deleteForm(
-    @Arg('groupName') groupName: string,
-    @Arg('formName') formName: string,
+    @Arg('gid', () => Int) groupId: number,
+    @Arg('fid', () => Int) formId: number,
     @Ctx() { userId }: GraphQLContext
   ): Promise<boolean> {
     const user = await User.findOne(userId);
     const group = await Group.findOne({
-      where: { name: groupName },
+      where: { id: groupId },
       relations: ['owner', 'forms']
     });
-    const form = await Form.findOne({ where: { name: formName } });
+    const form = await Form.findOne({ where: { id: formId } });
 
     if (
       !user ||
@@ -33,12 +33,12 @@ export default class DeleteFormResolver {
       return false;
     }
 
-    group.forms = group.forms!.filter((f) => f.name !== formName);
+    group.forms = group.forms!.filter((f) => f.id !== form.id);
 
     await group.save();
 
     await form.remove();
-    await removeForm(formName);
+    await removeForm(form.name);
 
     return true;
   }
