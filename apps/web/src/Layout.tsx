@@ -13,6 +13,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { navigate } from '@reach/router';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Grid from '@material-ui/core/Grid';
 import Link from './components/Link';
 import { useMeQuery } from './graphql';
 
@@ -68,7 +69,7 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <>
-      <AppBar className={classes.appBar} color="secondary" elevation={0} position="sticky">
+      <AppBar className={classes.appBar} color="secondary" elevation={0} position="fixed">
         <Toolbar>
           <Button
             color="primary"
@@ -116,14 +117,21 @@ const Layout: React.FC = ({ children }) => {
           </Menu>
         </Toolbar>
       </AppBar>
-      <Container component="main" maxWidth="xl" style={{ marginTop: 20 }}>
-        {children}
-      </Container>
-      <Container component="footer" maxWidth="xl" style={{ position: 'absolute', bottom: 0 }}>
-        <Box m={5}>
-          <Copyright />
-        </Box>
-      </Container>
+      <Toolbar />
+      <Grid container justify="space-between" style={{ height: '100%' }}>
+        <Grid item xs={12}>
+          <Container component="main" maxWidth="xl" style={{ marginTop: 20 }}>
+            {children}
+          </Container>
+        </Grid>
+        <Grid item xs={12}>
+          <footer style={{ width: '100%' }}>
+            <Box m={5}>
+              <Copyright />
+            </Box>
+          </footer>
+        </Grid>
+      </Grid>
     </>
   );
 };
