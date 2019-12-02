@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, OneToMany } from 'typeorm';
-import { ObjectType, Field, ID } from 'type-graphql';
+import { ObjectType, Field, Int } from 'type-graphql';
 
 import { User as IUser } from '@form/interfaces/types/User';
 
@@ -9,7 +9,7 @@ import Group from '@module/group/Group.Entity';
 @ObjectType()
 @Entity()
 export default class User extends BaseEntity implements IUser {
-  @Field(() => ID)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 

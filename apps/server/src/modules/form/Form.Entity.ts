@@ -1,7 +1,7 @@
 /* eslint-disable react/static-property-placement */
 /* eslint-disable import/no-cycle */
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
-import { ObjectType, Field, ID } from 'type-graphql';
+import { ObjectType, Field, Int } from 'type-graphql';
 
 import { Form as IForm } from '@form/interfaces/types/Form';
 
@@ -11,7 +11,7 @@ import { FormField, FormDataDisplay } from '@form/interfaces/src/FormData';
 @ObjectType()
 @Entity()
 export default class Form extends BaseEntity implements IForm {
-  @Field(() => ID)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 

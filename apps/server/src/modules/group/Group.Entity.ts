@@ -9,7 +9,7 @@ import {
   ManyToOne,
   OneToMany
 } from 'typeorm';
-import { ObjectType, Field, ID } from 'type-graphql';
+import { ObjectType, Field, Int } from 'type-graphql';
 
 import { Group as IGroup } from '@form/interfaces/types/Group';
 
@@ -19,7 +19,7 @@ import Form from '@module/form/Form.Entity';
 @ObjectType()
 @Entity()
 export default class Group extends BaseEntity implements IGroup {
-  @Field(() => ID)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
