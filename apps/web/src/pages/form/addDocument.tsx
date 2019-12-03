@@ -38,6 +38,7 @@ const AddDocumentPage: React.FC<RouteComponentProps<{ gid: string; fid: string }
   const variables = { gid: parseInt(gid!, 10), fid: parseInt(fid!, 10) };
   const formInputDataQuery = useGetFormFieldInputDataQuery({ variables });
   const [addDocument, addDocumentMutation] = useAddFormDocumentMutation();
+  if (formInputDataQuery.loading) return <div>Loading...</div>;
   const formInputData =
     formInputDataQuery &&
     formInputDataQuery.data &&
@@ -50,10 +51,12 @@ const AddDocumentPage: React.FC<RouteComponentProps<{ gid: string; fid: string }
     }));
   const initialValues =
     formInputData &&
-    formInputData.map((d) => ({
-      // eslint-disable-next-line no-nested-ternary
-      [d.name]: d.inputType === 'number' ? 0 : d.inputType === 'checkbox' ? false : ''
-    }));
+    Object.fromEntries(
+      formInputData.map((d) =>
+        // eslint-disable-next-line no-nested-ternary
+        [d.name, d.inputType === 'number' ? 0 : d.inputType === 'checkbox' ? false : '']
+      )
+    );
   return (
     <Container component="main" maxWidth="xl" style={{ paddingBottom: 20 }}>
       <div className={classes.paper}>
