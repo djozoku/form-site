@@ -18,7 +18,8 @@ import {
 } from '@form/interfaces/types/FormData';
 
 import FormTextField from '../../form/FormTextField';
-import FormSelectField, { createItem, Item } from '../../form/FormSelectField';
+import FormSelectField from '../../form/FormSelectField';
+import { Item, createItem } from '../../form/Item';
 
 interface ConditionProps {
   type: ValueConditionTypes | BooleanConditionTypes;

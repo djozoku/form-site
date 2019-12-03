@@ -7,8 +7,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import { FormFieldInputType } from '@form/interfaces/types/FormData';
 
-import FormSelectField, { createItem } from '../../form/FormSelectField';
+import FormSelectField from '../../form/FormSelectField';
 import FormTextField from '../../form/FormTextField';
+
+import { createItem } from '../../form/Item';
 
 interface FormFieldProps {
   index: number;
