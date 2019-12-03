@@ -1,6 +1,6 @@
 import React from 'react';
-import { RouteComponentProps, navigate } from '@reach/router';
-import { Formik, Form, FieldArray } from 'formik';
+import { RouteComponentProps } from '@reach/router';
+import { Formik, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
