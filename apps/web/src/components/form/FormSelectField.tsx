@@ -6,17 +6,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export interface Item {
-  label: string;
-  value: any;
-  key: string;
-}
-
-export const createItem = (key: string, label?: string, value?: any): Item => {
-  if (!label) return { key, label: key, value: key };
-  if (!value) return { key, label, value: label };
-  return { key, label, value };
-};
+import { Item } from './Item';
 
 type FormSelectFieldProps = {
   label: string;

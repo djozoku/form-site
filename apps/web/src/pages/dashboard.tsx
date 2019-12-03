@@ -27,6 +27,7 @@ import DashboardIndex from './dashboard/info';
 import FormListPage from './group/formList';
 import CreateFormPage from './form/createForm';
 import FormDataPage from './form/formData';
+import AddDocumentPage from './form/addDocument';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -263,6 +264,7 @@ const DashboardPage: React.FC<RouteComponentProps> = ({ navigate, location }) =>
                   <FormListPage path="group/:id" />
                   <CreateFormPage path="group/:id/form/create" />
                   <FormDataPage path="group/:gid/form/:fid" />
+                  <AddDocumentPage path="group/:gid/form/:fid/add" />
                 </Router>
               )}
             </Paper>
