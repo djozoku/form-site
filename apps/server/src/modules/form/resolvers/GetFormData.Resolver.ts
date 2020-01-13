@@ -70,10 +70,10 @@ const parseDisplayTree = async (table: string, display: FormDisplays): Promise<n
 @Resolver()
 export default class GetFormDataResolver {
   @Authorized()
-  @Query(() => String)
+  @Query(() => String, { description: 'Get document data from a form with an id, Auth required' })
   async getFormData(
-    @Arg('gid', () => Int) groupId: number,
-    @Arg('fid', () => Int) formId: number,
+    @Arg('gid', () => Int, { description: 'Group ID' }) groupId: number,
+    @Arg('fid', () => Int, { description: 'Form ID' }) formId: number,
     @Ctx() { userId }: GraphQLContext
   ): Promise<string> {
     const user = await User.findOne(userId);

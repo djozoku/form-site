@@ -15,7 +15,7 @@ import LoginResponse from './Login.Response';
 
 @Resolver()
 export default class LoginResolver {
-  @Mutation(() => LoginResponse, { nullable: true })
+  @Mutation(() => LoginResponse, { nullable: true, description: 'Login a user with credentials' })
   async login(
     @Arg('user') { username, password }: LoginInput,
     @Ctx() { res }: GraphQLContext

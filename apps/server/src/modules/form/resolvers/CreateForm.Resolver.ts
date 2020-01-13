@@ -11,12 +11,14 @@ import { parseFormData } from '../utils/parseFormData';
 @Resolver()
 export default class CreateFormResolver {
   @Authorized()
-  @Mutation(() => Int)
+  @Mutation(() => Int, {
+    description: 'Create a new form for a group that the current user is owner of, Auth required'
+  })
   async createForm(
-    @Arg('groupName') groupName: string,
-    @Arg('formName') formName: string,
+    @Arg('groupName', { description: 'Group Name' }) groupName: string,
+    @Arg('formName', { description: 'Form Name' }) formName: string,
     // FIXME: use a real typescript type
-    @Arg('formData') formData: string,
+    @Arg('formData', { description: 'Form Data' }) formData: string,
     @Ctx() { userId }: GraphQLContext
   ): Promise<number> {
     const user = await User.findOne(userId);

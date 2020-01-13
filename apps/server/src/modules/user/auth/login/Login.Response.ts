@@ -2,6 +2,6 @@ import { ObjectType, Field } from 'type-graphql';
 
 @ObjectType()
 export default class LoginResponse {
-  @Field()
+  @Field({ description: 'Access Token' })
   accessToken: string;
 }

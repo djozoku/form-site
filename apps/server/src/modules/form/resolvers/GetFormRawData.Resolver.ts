@@ -11,10 +11,13 @@ import PaginationArgs from '~/utils/PaginationArgs';
 @Resolver()
 export default class GetFormRawDataResolver {
   @Authorized()
-  @Query(() => String, { nullable: true })
+  @Query(() => String, {
+    nullable: true,
+    description: 'Get all rows for a form with an id, Auth required'
+  })
   async getFormRawData(
-    @Arg('gid', () => Int) groupId: number,
-    @Arg('fid', () => Int) formId: number,
+    @Arg('gid', () => Int, { description: 'Group ID' }) groupId: number,
+    @Arg('fid', () => Int, { description: 'Form ID' }) formId: number,
     @Ctx() { userId }: GraphQLContext,
     @Args() { skip, take }: PaginationArgs
   ): Promise<string | null> {

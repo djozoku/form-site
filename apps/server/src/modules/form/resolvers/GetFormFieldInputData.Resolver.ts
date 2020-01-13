@@ -10,10 +10,13 @@ import FormFieldData from './FormFieldData.Type';
 @Resolver()
 export default class GetFormFieldInputDataResolver {
   @Authorized()
-  @Query(() => [FormFieldData], { nullable: true })
+  @Query(() => [FormFieldData], {
+    nullable: true,
+    description: 'Get input data for a form with an id, Auth required'
+  })
   async getFormFieldInputData(
-    @Arg('gid', () => Int) groupId: number,
-    @Arg('fid', () => Int) formId: number,
+    @Arg('gid', () => Int, { description: 'Group ID' }) groupId: number,
+    @Arg('fid', () => Int, { description: 'Form ID' }) formId: number,
     @Ctx() { userId }: GraphQLContext
   ): Promise<FormFieldData[] | null> {
     const user = await User.findOne(userId);

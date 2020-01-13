@@ -9,8 +9,11 @@ import Invite from './Invite.Entity';
 @Resolver()
 export default class InviteToGroupResolver {
   @Authorized()
-  @Mutation(() => Boolean)
-  async inviteToGroup(@Arg('group') groupName: string, @Arg('username') username: string) {
+  @Mutation(() => Boolean, { description: 'Invite a user to an owned group, Auth required' })
+  async inviteToGroup(
+    @Arg('group', { description: 'Name of the group to invite the user to' }) groupName: string,
+    @Arg('username', { description: 'Username of the user to invite' }) username: string
+  ) {
     // FIXME: we don't check if user is already in the group
     const group = await Group.findOne({ where: { name: groupName } });
     const user = await User.findOne({ where: { username } });

@@ -10,11 +10,11 @@ import { addFormDocument } from '../utils/addFormDocument';
 @Resolver()
 export default class AddFormDocumentResolver {
   @Authorized()
-  @Mutation(() => Boolean)
+  @Mutation(() => Boolean, { description: 'Add a document to a form, Auth required' })
   async addFormDocument(
-    @Arg('gid', () => Int) groupId: number,
-    @Arg('fid', () => Int) formId: number,
-    @Arg('document') document: string,
+    @Arg('gid', () => Int, { description: 'Group ID' }) groupId: number,
+    @Arg('fid', () => Int, { description: 'Form ID' }) formId: number,
+    @Arg('document', { description: 'The Document to add to the form' }) document: string,
     @Ctx() { userId }: GraphQLContext
   ): Promise<boolean> {
     const user = await User.findOne(userId);

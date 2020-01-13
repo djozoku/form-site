@@ -11,8 +11,11 @@ import Invite from './Invite.Entity';
 @Resolver()
 export default class AcceptInviteResolver {
   @Authorized()
-  @Mutation(() => Boolean)
-  async acceptInvite(@Arg('group') groupName: string, @Ctx() { userId }: GraphQLContext) {
+  @Mutation(() => Boolean, { description: 'Accept invite to a group, Auth required' })
+  async acceptInvite(
+    @Arg('group', { description: 'Group Name' }) groupName: string,
+    @Ctx() { userId }: GraphQLContext
+  ) {
     const user = await User.findOne(userId, { relations: ['groups'] });
     const group = await Group.findOne({ where: { name: groupName }, relations: ['members'] });
     // FIXME: finds invite only by group name, TOTALLY BROKEN!!!

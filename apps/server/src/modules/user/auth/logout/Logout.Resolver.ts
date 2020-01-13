@@ -4,7 +4,7 @@ import { GraphQLContext } from '~/types/GraphQLContext';
 
 @Resolver()
 export default class LogoutResolver {
-  @Mutation(() => Boolean)
+  @Mutation(() => Boolean, { description: 'Logout a user' })
   async logout(@Ctx() { res }: GraphQLContext): Promise<boolean> {
     res.clearCookie('xid');
     return true;

@@ -10,10 +10,12 @@ import { removeForm } from '../utils/removeForm';
 @Resolver()
 export default class DeleteFormResolver {
   @Authorized()
-  @Mutation(() => Boolean)
+  @Mutation(() => Boolean, {
+    description: 'Delete a form owned by the current user, Auth required'
+  })
   async deleteForm(
-    @Arg('gid', () => Int) groupId: number,
-    @Arg('fid', () => Int) formId: number,
+    @Arg('gid', () => Int, { description: 'Group ID' }) groupId: number,
+    @Arg('fid', () => Int, { description: 'Form ID' }) formId: number,
     @Ctx() { userId }: GraphQLContext
   ): Promise<boolean> {
     const user = await User.findOne(userId);

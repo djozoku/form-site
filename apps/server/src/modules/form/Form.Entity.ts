@@ -11,19 +11,19 @@ import { FormField, FormDataDisplay } from '@form/interfaces/src/FormData';
 @ObjectType()
 @Entity()
 export default class Form extends BaseEntity implements IForm {
-  @Field(() => Int)
+  @Field(() => Int, { description: 'Form ID' })
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
+  @Field({ description: 'Database name' })
   @Column('text', { unique: true })
   name: string;
 
-  @Field()
+  @Field({ description: 'Display Name' })
   @Column('text', { unique: true })
   displayName: string;
 
-  @Field(() => Group, { nullable: true })
+  @Field(() => Group, { nullable: true, description: 'Group that owns this form' })
   @ManyToOne(
     () => Group,
     (group) => group.forms

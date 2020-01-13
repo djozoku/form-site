@@ -10,8 +10,11 @@ import Group from './Group.Entity';
 @Resolver()
 export default class CreateGroupResolver {
   @Authorized()
-  @Mutation(() => Int)
-  async createGroup(@Arg('name') name: string, @Ctx() { userId }: GraphQLContext) {
+  @Mutation(() => Int, { description: 'Create a group, Auth required' })
+  async createGroup(
+    @Arg('name', { description: 'Group Name' }) name: string,
+    @Ctx() { userId }: GraphQLContext
+  ) {
     if (name.length > 100) return 0;
     const user = (await User.findOne(userId, { relations: ['ownedGroups'] })) as User;
     if (await Group.findOne({ where: { name } })) {

@@ -19,22 +19,22 @@ import Form from '@module/form/Form.Entity';
 @ObjectType()
 @Entity()
 export default class Group extends BaseEntity implements IGroup {
-  @Field(() => Int)
+  @Field(() => Int, { description: 'Group ID' })
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
+  @Field({ description: 'Group Name' })
   @Column('text', { unique: true })
   name: string;
 
-  @Field(() => User, { nullable: true })
+  @Field(() => User, { nullable: true, description: 'User that owns this group' })
   @ManyToOne(
     () => User,
     (user) => user.ownedGroups
   )
   owner?: User;
 
-  @Field(() => [User], { nullable: true })
+  @Field(() => [User], { nullable: true, description: 'Members of this group' })
   @ManyToMany(
     () => User,
     (user) => user.groups
@@ -42,7 +42,7 @@ export default class Group extends BaseEntity implements IGroup {
   @JoinTable()
   members?: User[];
 
-  @Field(() => [Form], { nullable: true })
+  @Field(() => [Form], { nullable: true, description: 'Forms owned by this group' })
   @OneToMany(
     () => Form,
     (form) => form.owner

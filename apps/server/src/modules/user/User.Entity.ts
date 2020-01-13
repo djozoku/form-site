@@ -9,23 +9,23 @@ import Group from '@module/group/Group.Entity';
 @ObjectType()
 @Entity()
 export default class User extends BaseEntity implements IUser {
-  @Field(() => Int)
+  @Field(() => Int, { description: 'User ID' })
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
+  @Field({ description: "User's First Name" })
   @Column()
   firstName: string;
 
-  @Field()
+  @Field({ description: "User's Last Name" })
   @Column()
   lastName: string;
 
-  @Field()
+  @Field({ description: "User's username" })
   @Column('text', { unique: true })
   username: string;
 
-  @Field()
+  @Field({ description: "User's email" })
   @Column('text', { unique: true })
   email: string;
 
@@ -38,14 +38,14 @@ export default class User extends BaseEntity implements IUser {
   @Column('int', { default: 0 })
   tokenVersion: number;
 
-  @Field(() => [Group], { nullable: true })
+  @Field(() => [Group], { nullable: true, description: 'Groups owned by this user' })
   @OneToMany(
     () => Group,
     (group) => group.owner
   )
   ownedGroups?: Group[];
 
-  @Field(() => [Group], { nullable: true })
+  @Field(() => [Group], { nullable: true, description: 'Groups that this user is a member of' })
   @ManyToMany(
     () => Group,
     (group) => group.members

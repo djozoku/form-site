@@ -15,7 +15,9 @@ UserValidator.init(userExists);
 
 @Resolver()
 export default class RegisterResolver {
-  @Mutation(() => String)
+  @Mutation(() => String, {
+    description: 'Register a user, will send a confirmation email to the specified email'
+  })
   async register(
     @Arg('user')
     { email, firstName, lastName, username, password }: RegisterInput

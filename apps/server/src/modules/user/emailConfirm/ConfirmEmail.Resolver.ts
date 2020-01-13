@@ -6,8 +6,10 @@ import EmailConfirmation from './EmailConfirm.Entity';
 
 @Resolver()
 export default class ConfirmEmailResolver {
-  @Mutation(() => Boolean)
-  async confirmEmail(@Arg('token') token: string) {
+  @Mutation(() => Boolean, {
+    description: 'Confirm an email with a token associated with that account'
+  })
+  async confirmEmail(@Arg('token', { description: 'Token' }) token: string) {
     const confirmation = await EmailConfirmation.findOne(token);
 
     if (!confirmation) {
