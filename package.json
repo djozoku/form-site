@@ -34,6 +34,8 @@
     "build:lib:i18n": "yarn --cwd libs/i18n tsc",
     "build:lib:interfaces": "yarn --cwd libs/interfaces tsc",
     "build:lib:validation": "yarn --cwd libs/validation tsc",
+    "clean:libs": "rimraf ./libs/*/lib && rimraf ./libs/*/types && rimraf ./libs/*/tsconfig.tsbuildinfo",
+    "rebuild:libs": "yarn clean:libs && yarn build:libs",
     "db:up": "yarn db:first && node sleep.js 10 && yarn db:create",
     "db:down": "yarn db:stop && node sleep.js 1 && yarn db:rm",
     "db:first": "docker run --name form-postgres -e POSTGRES_PASSWORD=ozokudev -p 5432:5432 -d postgres:11",
