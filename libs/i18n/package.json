@@ -9,6 +9,6 @@
     "i18next": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.4"
   }
 }

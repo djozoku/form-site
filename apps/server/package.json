@@ -43,7 +43,7 @@
     "@types/uuid": "^3.4.6",
     "ts-node": "^8.5.0",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.4"
   },
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
