@@ -38,11 +38,12 @@ module.exports = {
       "ignoreCase": true,
       "reservedFirst": true
     }],
-    "react/jsx-key": [1, {checkFragmentShorthand: true}],
+    "react/jsx-key": [1, { checkFragmentShorthand: true }],
     'react/button-has-type': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'global-require': 'off',
+    'consistent-return': 'off',
     'no-useless-constructor': 'off',
     'no-console': 'off',
     'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
