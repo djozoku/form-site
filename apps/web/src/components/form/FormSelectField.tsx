@@ -1,5 +1,5 @@
 import React from 'react';
-import { useField, FieldAttributes } from 'formik';
+import { useField, FieldHookConfig } from 'formik';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
@@ -12,7 +12,7 @@ type FormSelectFieldProps = {
   label: string;
   items: Item[];
   additionalChangeHandler?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-} & FieldAttributes<string>;
+} & FieldHookConfig<string>;
 
 const FormSelectField: React.FC<FormSelectFieldProps> = ({
   label,

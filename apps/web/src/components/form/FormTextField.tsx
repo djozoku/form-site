@@ -1,11 +1,11 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { useField, FieldAttributes } from 'formik';
+import { useField, FieldHookConfig } from 'formik';
 
 type FormTextFieldProps = {
   label: string;
   additionalChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-} & FieldAttributes<string>;
+} & FieldHookConfig<string>;
 
 const FormTextField: React.FC<FormTextFieldProps> = ({
   label,
