@@ -37,8 +37,6 @@ export default class MailSender {
 
   public static async send(options: Mail.Options) {
     const info = await this.instance.sendMail(options);
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(nodemailer.getTestMessageUrl(info));
-    }
+    return nodemailer.getTestMessageUrl(info);
   }
 }

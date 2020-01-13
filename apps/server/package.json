@@ -22,6 +22,7 @@
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
     "sql-bricks": "^2.0.4",
+    "ts-essentials": "^4.0.0",
     "tsconfig-paths": "^3.9.0",
     "type-graphql": "^0.17.5",
     "typeorm": "^0.2.20",
@@ -35,17 +36,17 @@
     "@types/express": "^4.17.2",
     "@types/graphql": "^14.5.0",
     "@types/jsonwebtoken": "^8.3.5",
-    "@types/node": "^12.12.7",
+    "@types/node": "^13.1.6",
     "@types/nodemailer": "^6.2.2",
     "@types/pg": "^7.11.2",
     "@types/sql-bricks": "^2.0.1",
     "@types/uuid": "^3.4.6",
     "ts-node": "^8.5.0",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.4"
   },
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --no-notify --respawn src/index.ts"
   }
 }

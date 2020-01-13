@@ -44,13 +44,17 @@ export class UserValidator {
     this.isValidEmail = isValidEmail.test(
       'exists',
       messages.exists('email'),
-      async (value: string) => existsTest('email', value)
+      async (value: string) => {
+        return !(await existsTest('email', value));
+      }
     );
 
     this.isValidUsername = isValidUsername.test(
       'exists',
       messages.exists('username'),
-      async (value: string) => existsTest('username', value)
+      async (value: string) => {
+        return !(await existsTest('username', value));
+      }
     );
   }
 

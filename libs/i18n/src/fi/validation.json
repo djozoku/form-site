@@ -7,5 +7,6 @@
   "lowercase": "{{field, in}} täytyy olla vähintään yksi pieni kirjain",
   "number": "{{field, in}} täytyy olla vähintään yksi numero",
   "special": "{{field, in}} täytyy olla vähintään yksi erikoismerkki",
-  "exists": "Tämä {{field, lower}} on jo käytössä"
+  "exists": "Tämä {{field, lower}} on jo käytössä",
+  "mismatch": "Nämä {{field, lower}} eivät täsmää"
 }

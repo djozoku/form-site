@@ -5,6 +5,9 @@
       "esnext.asynciterable",
       "scripthost"
     ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

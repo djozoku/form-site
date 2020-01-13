@@ -7,5 +7,6 @@
   "lowercase": "{{field}} must contain at least one lowercase letter",
   "number": "{{field}} must contain at least one number",
   "special": "{{field}} must contain at least one special character",
-  "exists": "This {{field, lower}} already exists"
+  "exists": "This {{field, lower}} already exists",
+  "mismatch": "These {{field, lower}} do not match"
 }
